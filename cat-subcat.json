@@ -1,0 +1,513 @@
+{
+    "request_id": "8f628938-3849-4525-833f-246142aa9963",
+    "status": "completed",
+    "website_url": "https://homestars.com/categories",
+    "user_prompt": "I'd like to get whole category names and all of the subcategory names under each one basically a json file {\"cat1\":[ {\"subcat1\":\"link\"}], \"cat2\":[{\"subcat2\":\"link2\"},{\"subcat3\":\"link3\"}]",
+    "result": {
+      "Construction & Renovations": [
+        {
+          "Bathroom renovation": "https://homestars.com/on/toronto/bathroom-renovation"
+        },
+        {
+          "Demolition": "https://homestars.com/on/toronto/demolition"
+        },
+        {
+          "Kitchen planning & renovation": "https://homestars.com/on/toronto/kitchen-planning-renovation"
+        },
+        {
+          "Basement renovations": "https://homestars.com/on/toronto/basement-renovation"
+        },
+        {
+          "Historical restoration": "https://homestars.com/on/toronto/historical-restoration"
+        },
+        {
+          "Home additions": "https://homestars.com/on/toronto/home-additions"
+        },
+        {
+          "Home inspection": "https://homestars.com/on/toronto/home-inspection"
+        },
+        {
+          "Elevators, Lifts & ramps installation & services": "https://homestars.com/on/toronto/elevators-lifts-ramps"
+        },
+        {
+          "Condominium renovation": "https://homestars.com/on/toronto/condominium-renovations"
+        },
+        {
+          "Renovation cleaning": "https://homestars.com/on/toronto/renovation-cleaning"
+        },
+        {
+          "Decks": "https://homestars.com/on/toronto/patios-decks"
+        }
+      ],
+      "Architects, Builders & Engineers": [
+        {
+          "Architects": "https://homestars.com/on/toronto/architects"
+        },
+        {
+          "Builders": "https://homestars.com/on/toronto/builders"
+        },
+        {
+          "Design/build": "https://homestars.com/on/toronto/design-build"
+        },
+        {
+          "General contractors": "https://homestars.com/on/toronto/general-contractors"
+        },
+        {
+          "Design/project management": "https://homestars.com/on/toronto/design-project-management"
+        },
+        {
+          "Drafting service": "https://homestars.com/on/toronto/drafting-service"
+        },
+        {
+          "Renovation advisors": "https://homestars.com/on/toronto/renovation-advisors"
+        },
+        {
+          "Structural engineering": "https://homestars.com/on/toronto/structural-engineering"
+        },
+        {
+          "Surveyors": "https://homestars.com/on/toronto/surveyors"
+        },
+        {
+          "Concrete contractors": "https://homestars.com/on/toronto/concrete-contractors"
+        }
+      ],
+      "Landscape & Garden": [
+        {
+          "Decorative concrete": "https://homestars.com/on/toronto/decorative-concrete"
+        },
+        {
+          "Garden maintenance": "https://homestars.com/on/toronto/garden-maintenance"
+        },
+        {
+          "Gazebos & sheds": "https://homestars.com/on/toronto/gazebos-sheds"
+        },
+        {
+          "Landscape stone": "https://homestars.com/on/toronto/interlocking-stone"
+        },
+        {
+          "Fences & gates": "https://homestars.com/on/toronto/fences-gates"
+        },
+        {
+          "Landscape architects": "https://homestars.com/on/toronto/landscape-architects"
+        },
+        {
+          "Landscape contractors & designers": "https://homestars.com/on/toronto/landscape-contractors-designers"
+        },
+        {
+          "Landscape lighting": "https://homestars.com/on/toronto/landscape-lighting"
+        },
+        {
+          "Masonry & bricklaying": "https://homestars.com/on/toronto/masonry-bricklaying"
+        },
+        {
+          "Lawn maintenance": "https://homestars.com/on/toronto/lawn-maintenance"
+        },
+        {
+          "Sprinkler systems": "https://homestars.com/on/toronto/sprinkler-systems"
+        },
+        {
+          "Swimming pools, spas & hot tubs": "https://homestars.com/on/toronto/swimming-pools-spas-hot-tubs"
+        },
+        {
+          "Tree service": "https://homestars.com/on/toronto/tree-service"
+        },
+        {
+          "Weed control": "https://homestars.com/on/toronto/weed-control"
+        }
+      ],
+      "Electrical & Home Theatre": [
+        {
+          "Alarm systems": "https://homestars.com/on/toronto/alarm-systems"
+        },
+        {
+          "Appliance retailers": "https://homestars.com/on/toronto/appliance-retailers"
+        },
+        {
+          "Computer repairs and support": "https://homestars.com/on/toronto/computer-repairs-service"
+        },
+        {
+          "Appliance repair": "https://homestars.com/on/toronto/appliance-repair"
+        },
+        {
+          "Electronic repairs": "https://homestars.com/on/toronto/electronic-repairs"
+        },
+        {
+          "Home automation": "https://homestars.com/on/toronto/home-automation"
+        },
+        {
+          "Home theater": "https://homestars.com/on/toronto/home-theater"
+        },
+        {
+          "Electricians": "https://homestars.com/on/toronto/electricians"
+        },
+        {
+          "Lighting": "https://homestars.com/on/toronto/lighting"
+        },
+        {
+          "Satellite sales & service": "https://homestars.com/on/toronto/satellite-sales-service"
+        },
+        {
+          "Vacuum sales & service": "https://homestars.com/on/toronto/vacuum-sales-service"
+        }
+      ],
+      "Cleaning Service": [
+        {
+          "Blinds cleaning & repairing": "https://homestars.com/on/toronto/blinds-cleaning-repairing"
+        },
+        {
+          "Carpet & rug cleaning & repairing": "https://homestars.com/on/toronto/carpet-rug-cleaning-repairing"
+        },
+        {
+          "Drapery & upholstery cleaning": "https://homestars.com/on/toronto/drapery-upholstery-cleaning"
+        },
+        {
+          "Duct cleaning": "https://homestars.com/on/toronto/duct-cleaning"
+        },
+        {
+          "House & apartment cleaning": "https://homestars.com/on/toronto/house-apartment-cleaning"
+        },
+        {
+          "Fire & water damage restoration": "https://homestars.com/on/toronto/fire-water-damage-restoration"
+        },
+        {
+          "House cleaning exteriors": "https://homestars.com/on/toronto/house-cleaning-exteriors"
+        },
+        {
+          "Junk removal": "https://homestars.com/on/toronto/junk-removal"
+        },
+        {
+          "Renovation cleaning": "https://homestars.com/on/toronto/renovation-cleaning"
+        }
+      ],
+      "Chimney Build & Repair": [
+        {
+          "Chimney build & repair": "https://homestars.com/on/toronto/chimney-build-repair"
+        },
+        {
+          "Chimney sweeps": "https://homestars.com/on/toronto/chimney-sweeps"
+        },
+        {
+          "Waterproofing": "https://homestars.com/on/toronto/waterproofing"
+        },
+        {
+          "Tuck pointing": "https://homestars.com/on/toronto/chimney-tuck-pointing"
+        },
+        {
+          "Interlocking stone": "https://homestars.com/on/toronto/interlocking-stone"
+        },
+        {
+          "Masonry & bricklaying": "https://homestars.com/on/toronto/masonry-bricklaying"
+        }
+      ],
+      "Flooring": [
+        {
+          "Carpet & rug retailers": "https://homestars.com/on/toronto/carpet-rug-retailers"
+        },
+        {
+          "Carpet installers": "https://homestars.com/on/toronto/carpet-installers"
+        },
+        {
+          "Floor retailers": "https://homestars.com/on/toronto/floor-retailers"
+        },
+        {
+          "Tile & stone contractors": "https://homestars.com/on/toronto/tile-stone-contractors"
+        },
+        {
+          "Decorative concrete": "https://homestars.com/on/toronto/decorative-concrete"
+        }
+      ],
+      "Handyman Services": [
+        {
+          "Building supplies and hardware": "https://homestars.com/on/toronto/building-supplies-and-hardware"
+        },
+        {
+          "Handyman services": "https://homestars.com/on/toronto/handyman-services"
+        },
+        {
+          "Paint & wallpaper contractors": "https://homestars.com/on/toronto/paint-wallpaper-contractors"
+        }
+      ],
+      "Heating & Furnaces": [
+        {
+          "BBQ equipment & services": "https://homestars.com/on/toronto/bbq-equipment-service"
+        },
+        {
+          "Duct cleaning": "https://homestars.com/on/toronto/duct-cleaning"
+        },
+        {
+          "Fireplaces": "https://homestars.com/on/toronto/fireplaces"
+        },
+        {
+          "Gas line installation": "https://homestars.com/on/toronto/gas-line-installation"
+        },
+        {
+          "Fireplace mantels": "https://homestars.com/on/toronto/fireplace-mantels"
+        },
+        {
+          "Heating & air conditioning": "https://homestars.com/on/toronto/heating-air-conditioning"
+        }
+      ],
+      "Plumbing": [
+        {
+          "Drain services": "https://homestars.com/on/toronto/drain-services"
+        },
+        {
+          "Drainage contractors": "https://homestars.com/on/toronto/drainage-contractors"
+        },
+        {
+          "Sprinkler systems": "https://homestars.com/on/toronto/sprinkler-systems"
+        },
+        {
+          "Water filtration & purification": "https://homestars.com/on/toronto/water-filtration-purification"
+        },
+        {
+          "Septic tank cleaning, repair & installation": "https://homestars.com/on/toronto/septic-tank-cleaning-repair-installation"
+        },
+        {
+          "Plumbing": "https://homestars.com/on/toronto/plumbing"
+        }
+      ],
+      "Roofing": [
+        {
+          "Skylight installation & repair": "https://homestars.com/on/toronto/skylights"
+        },
+        {
+          "Gutters & eavestroughs": "https://homestars.com/on/toronto/gutters-eavestroughs"
+        },
+        {
+          "Roofing": "https://homestars.com/on/toronto/roofing"
+        }
+      ],
+      "Walls & Ceilings": [
+        {
+          "Drywall contractors": "https://homestars.com/on/toronto/drywall-contractors"
+        },
+        {
+          "Insulation": "https://homestars.com/on/toronto/insulation"
+        },
+        {
+          "Plastering": "https://homestars.com/on/toronto/plastering"
+        },
+        {
+          "Stucco": "https://homestars.com/on/toronto/stucco"
+        },
+        {
+          "Paint & wallpaper contractors": "https://homestars.com/on/toronto/paint-wallpaper-contractors"
+        },
+        {
+          "Trim and moldings": "https://homestars.com/on/toronto/moldings"
+        }
+      ],
+      "Windows & Doors": [
+        {
+          "Mirrors & glass": "https://homestars.com/on/toronto/mirrors-glass"
+        },
+        {
+          "Shutters & blinds": "https://homestars.com/on/toronto/shutters-blinds"
+        },
+        {
+          "Window & gutter cleaning": "https://homestars.com/on/toronto/window-gutter-cleaning"
+        },
+        {
+          "Windows & doors installation & service": "https://homestars.com/on/toronto/windows-doors"
+        },
+        {
+          "Awnings & canopies": "https://homestars.com/on/toronto/awnings-canopies"
+        },
+        {
+          "Bathroom & kitchen - fixture & accessories": "https://homestars.com/on/toronto/bathroom-kitchen-fixtures-accessories"
+        },
+        {
+          "Blinds cleaning & repairing": "https://homestars.com/on/toronto/blinds-cleaning-repairing"
+        },
+        {
+          "Drapery & curtains": "https://homestars.com/on/toronto/drapery-curtains"
+        },
+        {
+          "Drapery & upholstery cleaning": "https://homestars.com/on/toronto/drapery-upholstery-cleaning"
+        },
+        {
+          "Locks & locksmiths": "https://homestars.com/on/toronto/locks-locksmiths"
+        }
+      ],
+      "Carpentry & Woodworking": [
+        {
+          "Bathroom & kitchen - fixture & accessories": "https://homestars.com/on/toronto/bathroom-kitchen-fixtures-accessories"
+        },
+        {
+          "Cabinetry & millwork": "https://homestars.com/on/toronto/cabinetry-millwork"
+        },
+        {
+          "Carpenters": "https://homestars.com/on/toronto/carpenters"
+        },
+        {
+          "Framing": "https://homestars.com/on/toronto/framing"
+        },
+        {
+          "Kitchen & bathroom - cabinets & design": "https://homestars.com/on/toronto/kitchen-bathroom-cabinets-design"
+        },
+        {
+          "Railings": "https://homestars.com/on/toronto/railings"
+        },
+        {
+          "Stair builders": "https://homestars.com/on/toronto/stair-builders"
+        },
+        {
+          "Woodworking": "https://homestars.com/on/toronto/woodworking"
+        },
+        {
+          "Closet & storage solutions": "https://homestars.com/on/toronto/closet-storage-solutions"
+        }
+      ],
+      "Decorators & Designers": [
+        {
+          "Game rooms, entertainment": "https://homestars.com/on/toronto/game-rooms-entertainment"
+        },
+        {
+          "Garage design & organization": "https://homestars.com/on/toronto/garage-design-organization"
+        },
+        {
+          "Interior decorators": "https://homestars.com/on/toronto/interior-decorators"
+        },
+        {
+          "Kitchen & bathroom - cabinets & design": "https://homestars.com/on/toronto/kitchen-bathroom-cabinets-design"
+        },
+        {
+          "Interior design": "https://homestars.com/on/toronto/interior-design"
+        },
+        {
+          "Home staging": "https://homestars.com/on/toronto/staging"
+        }
+      ],
+      "Foundations": [
+        {
+          "Foundations": "https://homestars.com/on/toronto/foundations"
+        }
+      ],
+      "Furniture": [
+        {
+          "Furniture": "https://homestars.com/on/toronto/furniture"
+        },
+        {
+          "Furniture designers & custom builders": "https://homestars.com/on/toronto/furniture-designers-custom-builders"
+        },
+        {
+          "Furniture rental": "https://homestars.com/on/toronto/furniture-rental"
+        },
+        {
+          "Upholsteres": "https://homestars.com/on/toronto/upholsterers"
+        },
+        {
+          "Furniture refinish & repair": "https://homestars.com/on/toronto/furniture-refinish-repair"
+        }
+      ],
+      "Garage": [
+        {
+          "Closet & storage solutions": "https://homestars.com/on/toronto/closet-storage-solutions"
+        },
+        {
+          "Garage design & organization": "https://homestars.com/on/toronto/garage-design-organization"
+        },
+        {
+          "Moving & storage": "https://homestars.com/on/toronto/moving-storage"
+        },
+        {
+          "Organizing products & services": "https://homestars.com/on/toronto/organizing-products-services"
+        },
+        {
+          "Garage doors & hardware": "https://homestars.com/on/toronto/garage-doors-hardware"
+        }
+      ],
+      "Green Home Improvement": [
+        {
+          "Electrical vehicle charging": "https://homestars.com/on/toronto/electrical-vehicle-charging"
+        },
+        {
+          "Green products & services": "https://homestars.com/on/toronto/green-products-services"
+        },
+        {
+          "Solar panels": "https://homestars.com/on/toronto/solar-panels"
+        },
+        {
+          "Solar water heating": "https://homestars.com/on/toronto/solar-water-heating"
+        },
+        {
+          "Renewable energy": "https://homestars.com/on/toronto/renewable-energy"
+        },
+        {
+          "Sunrooms, solariums & greenhouses": "https://homestars.com/on/toronto/sunrooms-solariums-greenhouses"
+        }
+      ],
+      "Moving & Storage": [
+        {
+          "Closet & storage solutions": "https://homestars.com/on/toronto/closet-storage-solutions"
+        },
+        {
+          "Moving & storage": "https://homestars.com/on/toronto/moving-storage"
+        },
+        {
+          "Organizing products & services": "https://homestars.com/on/toronto/organizing-products-services"
+        },
+        {
+          "Piano moving & tuning": "https://homestars.com/on/toronto/piano-moving-tuning"
+        },
+        {
+          "Self storage": "https://homestars.com/on/toronto/self-storage"
+        }
+      ],
+      "Safety": [
+        {
+          "Asbestos, lead and radon removal": "https://homestars.com/on/toronto/asbestos-lead-removal"
+        },
+        {
+          "Home inspection": "https://homestars.com/on/toronto/home-inspection"
+        },
+        {
+          "Pest & animal control": "https://homestars.com/on/toronto/pest-animal-control"
+        },
+        {
+          "Snow removal": "https://homestars.com/on/toronto/snow-removal"
+        },
+        {
+          "Mold detection & removal": "https://homestars.com/on/toronto/mold-detection-removal"
+        }
+      ],
+      "Siding": [
+        {
+          "Siding": "https://homestars.com/on/toronto/siding"
+        },
+        {
+          "Stucco": "https://homestars.com/on/toronto/stucco"
+        }
+      ],
+      "Specialty Services": [
+        {
+          "Art metal work": "https://homestars.com/on/toronto/art-metal-work"
+        },
+        {
+          "Decorative concrete": "https://homestars.com/on/toronto/decorative-concrete"
+        }
+      ],
+      "Tile & Stone": [
+        {
+          "Countertops": "https://homestars.com/on/toronto/countertops"
+        },
+        {
+          "Decorative concrete": "https://homestars.com/on/toronto/decorative-concrete"
+        },
+        {
+          "Interlocking stone": "https://homestars.com/on/toronto/interlocking-stone"
+        },
+        {
+          "Paving contractors": "https://homestars.com/on/toronto/paving-contractors"
+        },
+        {
+          "Tile & Stone contractors": "https://homestars.com/on/toronto/tile-stone-contractors"
+        },
+        {
+          "Tile & grout cleaning": "https://homestars.com/on/toronto/tile-and-grout-cleaning"
+        }
+      ]
+    },
+    "error": ""
+  }
