@@ -1,5 +1,5 @@
 from utils import load_json, setup_logger
-from scrapper import initialize_driver, scroll_to_load
+from scrapper import initialize_driver, scroll_to_load, extract_companies, fetch_company_details
 import os
 
 def main():
@@ -38,7 +38,12 @@ def main():
                 
                 driver.get(url)
                 scroll_to_load(driver, name)
-                # Extract data (to be implemented later)
+                companies = extract_companies(driver)
+                print("companies extracted")
+                print(companies)
+                company_details = fetch_company_details(driver, companies)
+                print("company details fetched")
+                print(company_details)
     finally:
         driver.quit()
         logger.info("Scraper finished.")
