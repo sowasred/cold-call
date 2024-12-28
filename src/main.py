@@ -8,7 +8,7 @@ def main():
     os.makedirs("logs", exist_ok=True)
     print("logs directory created")
     # Setup logger
-    logger = setup_logger("logs/scraper.log")
+    logger = setup_logger("logs")
     logger.info("Starting Homestar Scraper")
     print("logger setup")
     # Load configuration

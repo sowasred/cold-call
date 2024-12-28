@@ -9,12 +9,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 # Configure logging
-logging.basicConfig(
-    filename='logs/scraper.log',
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s'
-)
-logger = logging.getLogger(__name__)
+logger = logging.getLogger()
 
 def initialize_driver():
     """Initialize and return the Selenium WebDriver."""
