@@ -1,3 +1,4 @@
+import undetected_chromedriver as uc
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
@@ -13,10 +14,15 @@ logger = logging.getLogger()
 
 def initialize_driver():
     """Initialize and return the Selenium WebDriver."""
-    options = webdriver.ChromeOptions()
-    options.add_argument('--headless')  # Run in headless mode
-    options.add_argument('--disable-gpu')
-    return webdriver.Chrome(options=options)
+    options = uc.ChromeOptions()
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+    # options.add_argument('--disable-gpu')
+    options.add_argument("user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36")
+    options.add_argument('--window-size=1440,900')  # Set window size for a 14 inch MacBook
+
+    driver = uc.Chrome(options=options)
+    return driver
 
 def scroll_to_load(driver, subcategory_name):
     """Scroll to the bottom of the page until all content is loaded."""
@@ -60,17 +66,123 @@ def fetch_company_details(driver, company_name_urls):
     for company in company_name_urls:
         try:
             driver.get(company['url'])
-            # Wait up to 10 seconds for page to load
-            # wait = WebDriverWait(driver, 10)
+            logger.info(f"Navigating to company URL: {company['url']}")
             
-            # # Wait for and click the reveal phone button
-            # reveal_button = wait.until(
-            #     EC.element_to_be_clickable((By.CSS_SELECTOR, "button[data-test-id='reveal-phone-number']"))
-            # )
-            # reveal_button.click()
-            time.sleep(1)  # Short wait for phone number to appear
+            # Wait for page to be fully loaded
+            logger.debug("Waiting for page load...")
+            WebDriverWait(driver, 10).until(
+                lambda driver: driver.execute_script('return document.readyState') == 'complete'
+            )
+            logger.info("Page load complete")
+
+            # Log detailed page information
+            logger.info(f"Current URL: {driver.current_url}")
+            logger.info(f"Page Title: {driver.title}")
             
-            # phone_number = driver.find_element(By.CSS_SELECTOR, "button[data-test-id='company-phone-number'] span").text
+            # Stop here for inspection
+            input("Press Enter to continue after inspecting the page...")
+            
+            # Check if we can find any main content
+            try:
+                # Wait for page load
+                # WebDriverWait(driver, 10).until(
+                #     lambda driver: driver.execute_script('return document.readyState') == 'complete'
+                # )
+                
+                # Log the current page title and URL for verification
+                # Uncomment the following lines one by one to debug step by step
+                
+                # Step 1: Log the page title
+                logger.debug(f"Page Title: {driver.title}")
+                
+                # Step 2: Log the current URL
+                logger.debug(f"Current URL: {driver.current_url}")
+                
+                # Step 3: Log all available IDs on the page
+                contact_element = WebDriverWait(driver, 5).until(
+                    EC.presence_of_element_located((By.CSS_SELECTOR, "[data-react-class='CompanyContactLinks']"))
+                )
+                logger.debug("Found element with data-react-class='CompanyContactLinks'")
+                logger.debug(f"Element HTML: {contact_element.get_attribute('innerHTML')}")
+                
+                # # Step 4: Try to find main content with different approaches
+                # main_content = WebDriverWait(driver, 5).until(
+                #     EC.presence_of_element_located((By.CSS_SELECTOR, ".company-result"))
+                # )
+                # logger.debug("Main content found using alternative selector")
+                
+                # # Log all available IDs on the page
+                # ids = driver.execute_script("""
+                #     return Array.from(document.querySelectorAll('[id]')).map(el => el.id);
+                # """)
+                # logger.debug(f"Available IDs on page: {ids}")
+                
+                # # Try to find main content with different approaches
+                # main_content = WebDriverWait(driver, 5).until(
+                #     EC.presence_of_element_located((By.CSS_SELECTOR, ".company-result"))
+                # )
+                # logger.debug("Main content found using alternative selector")
+                
+            except TimeoutException:
+                logger.error("Could not find main content - possible anti-bot protection")
+                logger.error(f"Page source preview: {driver.page_source[:1000]}")
+                raise Exception("Possible anti-bot protection")
+
+            # Now proceed with finding the button
+            try:
+                logger.debug("Attempting to find reveal button...")
+                reveal_button = WebDriverWait(driver, 5).until(
+                    EC.element_to_be_clickable((By.CSS_SELECTOR, "button[data-test-id='reveal-phone-number']"))
+                )
+                
+                # Log page state before clicking
+                logger.debug(f"Page title: {driver.title}")
+                logger.debug(f"Current URL: {driver.current_url}")
+                
+                reveal_button.click()
+                logger.info("Successfully clicked reveal button")
+                
+                try:
+                    # Wait for the element containing data-react-props
+                    contact_element = WebDriverWait(driver, 5).until(
+                        EC.presence_of_element_located((By.CSS_SELECTOR, "[data-react-class='CompanyContactLinks']"))
+                    )
+                    
+                    # Get the data-react-props attribute
+                    props_json = contact_element.get_attribute('data-react-props')
+                    
+                    # Parse the JSON (need to handle HTML entities)
+                    import html
+                    decoded_props = html.unescape(props_json)
+                    import json
+                    props_data = json.loads(decoded_props)
+                    
+                    # Extract phone number
+                    phone_number = props_data.get('phoneNumber')
+                    logger.info(f"Successfully extracted phone number: {phone_number}")
+                    
+                except TimeoutException:
+                    logger.error("Could not find CompanyContactLinks element")
+                    phone_number = None
+                except json.JSONDecodeError:
+                    logger.error("Failed to parse data-react-props JSON")
+                    phone_number = None
+                except Exception as e:
+                    logger.error(f"Unexpected error while extracting phone number: {str(e)}")
+                    phone_number = None
+                
+            except TimeoutException as e:
+                logger.error(f"TimeoutException: {str(e)}")
+                # Log more detailed page state
+                logger.error("Current URL: " + driver.current_url)
+                logger.error("Page title: " + driver.title)
+                logger.error("Cookies: " + str(driver.get_cookies()))
+                phone_number = None
+            except Exception as e:
+                logger.error(f"Unexpected error: {str(e)}")
+                logger.error(f"Error type: {type(e).__name__}")
+                phone_number = None
+            
             # get the website
             website = driver.find_element(By.CSS_SELECTOR, "a[data-testid='company-listing-website']").get_attribute("href")
             # get the score of the company
