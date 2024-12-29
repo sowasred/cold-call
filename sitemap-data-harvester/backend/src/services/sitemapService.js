@@ -1,7 +1,6 @@
 const axios = require('axios');
 const xml2js = require('xml2js');
 const puppeteerUtils = require('../utils/puppeteerUtils');
-const openaiUtils = require('../utils/openaiUtils');
 
 let combinedContent = '';
 let seenContent = new Set();
@@ -41,10 +40,8 @@ exports.extractContent = async (url) => {
         combinedContent += `\n\n--- Page ${i + 1}: ${urls[i]} ---\n\n${uniqueContent}`;
       }
     }
-    // Generate company summary
-    const companySummary = await openaiUtils.generateCompanySummary(combinedContent);
     
-    return { message: 'Content extracted successfully', totalPages: urls.length, summary: companySummary };
+    return { message: 'Content extracted successfully', totalPages: urls.length };
   } catch (error) {
     throw new Error('Failed to extract content: ' + error.message);
   }
