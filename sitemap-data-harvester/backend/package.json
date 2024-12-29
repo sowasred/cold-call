@@ -1,0 +1,47 @@
+{
+  "name": "sitemap-data-harvester",
+  "version": "1.0.0",
+  "description": "This repository contains the code for a web application that allows users to extract data from websites using their XML sitemaps.",
+  "keywords": [
+    "sitemap",
+    "extractor",
+    "web-scraping",
+    "puppeteer",
+    "express",
+    "nodejs",
+    "content-extraction",
+    "xml-parsing",
+    "seo-tool",
+    "website-analysis",
+    "docker",
+    "pdf-generation",
+    "document-merger",
+    "url-validation"
+  ],
+  "main": "src/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sowasred/sitemap-data-harvester.git"
+  },
+  "author": "sowasred",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sowasred/sitemap-data-harvester/issues"
+  },
+  "homepage": "https://github.com/sowasred/sitemap-data-harvester#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "axios": "^1.7.7",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "pdfkit": "^0.15.0",
+    "puppeteer": "^23.3.0",
+    "xml2js": "^0.6.2"
+  }
+}
