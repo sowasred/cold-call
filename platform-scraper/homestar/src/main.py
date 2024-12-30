@@ -1,6 +1,12 @@
 from utils import load_json, setup_logger
-from scrapper import initialize_driver, scroll_to_load, extract_companies, fetch_company_details
+from scraper import (
+    initialize_driver,
+    scroll_to_load,
+    extract_companies,
+    fetch_company_details,
+)
 import os
+
 
 def main():
     print("Starting Homestar Scraper")
@@ -29,13 +35,15 @@ def main():
             for subcategory_dict in subcategories:
                 # Safer dictionary unpacking
                 if not subcategory_dict or len(subcategory_dict) != 1:
-                    logger.warning(f"Skipping invalid subcategory format: {subcategory_dict}")
+                    logger.warning(
+                        f"Skipping invalid subcategory format: {subcategory_dict}"
+                    )
                     continue
-                
+
                 name = next(iter(subcategory_dict.keys()))
                 url = subcategory_dict[name]
                 logger.info(f"Processing subcategory: {name} at {url}")
-                
+
                 driver.get(url)
                 scroll_to_load(driver, name)
                 companies = extract_companies(driver)
@@ -47,6 +55,7 @@ def main():
     finally:
         driver.quit()
         logger.info("Scraper finished.")
+
 
 if __name__ == "__main__":
     main()
