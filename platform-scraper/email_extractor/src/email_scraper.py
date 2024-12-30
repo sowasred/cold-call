@@ -1,9 +1,7 @@
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException, NoSuchElementException
 import logging
 import re
+from email_processor import EmailProcessor
 
 logger = logging.getLogger(__name__)
 
@@ -49,30 +47,42 @@ class WebEmailScraper:
 
     def scrape_emails_strategically(self, target_url):
         """
-        Strategically scrape emails from main page and contact pages.
-        Returns tuple of (found_emails: list, source_url: str)
+        Strategic email extraction with processing.
+
+        Args:
+            base_url: Target URL to scrape
+
+        Returns:
+            tuple: (best_email, source_url) where best_email might be None
         """
-        logger.info(f"Scanning main page: {target_url}")
+        logger.info(f"Checking main page: {target_url}")
+
+        email_processor = EmailProcessor()
 
         # Check main page first
         self.driver.get(target_url)
-        main_page_results = self._collect_emails_from_page()
+        main_page_emails = self._collect_emails_from_page()
 
-        if main_page_results:
-            return main_page_results, target_url
+        if main_page_emails:
+            best_email = email_processor.process_emails(main_page_emails, target_url)
+            if best_email:
+                logger.info(f"Found best email: {best_email} at {target_url}")
+                return best_email, target_url
 
-        # Look for and check contact pages
-        contact_page_urls = self.find_potential_contact_pages()
+        # Check contact pages if no suitable email found
+        contact_links = self.find_contact_links()
 
-        for page_url in contact_page_urls:
-            logger.info(f"Scanning contact page: {page_url}")
-            self.driver.get(page_url)
-            contact_page_results = self._collect_emails_from_page()
+        for link in contact_links:
+            logger.info(f"Checking contact page: {link}")
+            self.driver.get(link)
+            contact_page_emails = self._collect_emails_from_page()
 
-            if contact_page_results:
-                return contact_page_results, page_url
+            if contact_page_emails:
+                best_email = email_processor.process_emails(contact_page_emails, link)
+                if best_email:
+                    return best_email, link
 
-        return [], target_url
+        return None, target_url
 
     def _collect_emails_from_page(self):
         """Aggregate emails found through all extraction methods."""

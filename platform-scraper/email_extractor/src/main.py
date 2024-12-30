@@ -65,11 +65,11 @@ def main():
         results = {}
         for url in urls:
             logger.info(f"Processing base URL: {url}")
-            emails, source_url = extractor.scrape_emails_strategically(url)
+            email, source_url = extractor.scrape_emails_strategically(url)
 
-            if emails:
-                logger.info(f"Found {len(emails)} emails at {source_url}: {emails}")
-                results[url] = {"emails": emails, "found_at": source_url}
+            if email:
+                logger.info(f"Found {email} at {source_url}")
+                results[url] = {"email": email, "found_at": source_url}
             else:
                 logger.info(f"No emails found for {url}")
                 results[url] = {"emails": [], "found_at": None}
