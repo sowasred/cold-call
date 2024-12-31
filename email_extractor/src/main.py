@@ -1,16 +1,9 @@
-import json
-import os
 import logging
+import os
 from datetime import datetime
 import undetected_chromedriver as uc
-from email_scraper import WebEmailScraper
-
-
-def load_json(file_path):
-    """Load JSON data from a file."""
-    with open(file_path, "r") as file:
-        return json.load(file)
-
+from email_enricher import HomestarEmailEnricher
+import pandas as pd
 
 def setup_logger(log_dir):
     """Setup logger with both latest and timestamped log files."""
@@ -47,37 +40,68 @@ def initialize_driver():
     return uc.Chrome(options=options)
 
 
+def find_latest_csv(directory: str) -> str:
+    """Find the most recent CSV file in the specified directory.
+    
+    Args:
+        directory: Directory to search for CSV files
+        
+    Returns:
+        Path to the most recent CSV file
+        
+    Raises:
+        FileNotFoundError: If no CSV files exist in the directory
+    """
+    csv_files = [f for f in os.listdir(directory) if f.endswith('.csv')]
+    if not csv_files:
+        raise FileNotFoundError(f"No CSV files found in {directory}")
+    
+    return os.path.join(
+        directory,
+        max(csv_files, key=lambda x: os.path.getctime(os.path.join(directory, x)))
+    )
+
+
 def main():
     # Setup logging
     os.makedirs("logs", exist_ok=True)
     logger = setup_logger("logs")
-    logger.info("Starting Email Scraper")
-
-    # Initialize driver
-    driver = initialize_driver()
-
+    logger.info("Starting Homestar Email Enrichment")
+    
+    driver = None
     try:
-        extractor = WebEmailScraper(driver)
-
-        # Now we only need the base URLs
-        urls = load_json("config/websites.json")
-
-        results = {}
-        for url in urls:
-            logger.info(f"Processing base URL: {url}")
-            email, source_url = extractor.scrape_emails_strategically(url)
-
-            if email:
-                logger.info(f"Found {email} at {source_url}")
-                results[url] = {"email": email, "found_at": source_url}
-            else:
-                logger.info(f"No emails found for {url}")
-                results[url] = {"emails": [], "found_at": None}
-
+        # Initialize driver
+        driver = initialize_driver()
+        
+        # Find and validate input file
+        output_dir = "output"
+        os.makedirs(output_dir, exist_ok=True)
+        
+        try:
+            input_path = find_latest_csv(output_dir)
+            logger.info(f"Processing file: {input_path}")
+        except FileNotFoundError as e:
+            logger.error(f"Failed to find input CSV: {e}")
+            return
+        
+        # Create enricher instance and process
+        try:
+            enricher = HomestarEmailEnricher(driver, input_path)
+            enricher.process_companies()
+            
+            # Save results back to the same file
+            enricher.save_results(input_path)
+            logger.info(f"Successfully updated {input_path} with email data")
+            
+        except pd.errors.EmptyDataError:
+            logger.error("Input CSV file is empty")
+        except Exception as e:
+            logger.error(f"Error during enrichment process: {str(e)}")
+            
     finally:
-        driver.quit()
-        logger.info("Email scraper finished")
-
+        if driver:
+            driver.quit()
+            logger.info("Driver closed")
 
 if __name__ == "__main__":
     main()

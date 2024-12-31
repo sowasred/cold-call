@@ -70,7 +70,7 @@ class WebEmailScraper:
                 return best_email, target_url
 
         # Check contact pages if no suitable email found
-        contact_links = self.find_contact_links()
+        contact_links = self.find_potential_contact_pages()
 
         for link in contact_links:
             logger.info(f"Checking contact page: {link}")

@@ -11,6 +11,7 @@ A Python-based web scraping tool that strategically extracts and validates email
 - MX record verification
 - Detailed logging system
 - Anti-detection measures using undetected-chromedriver
+- In-place CSV enrichment with email data
 
 ## Prerequisites
 
@@ -40,18 +41,30 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
+## Usage
 
-4. Add target websites to `config/websites.json`:
+1. Place your CSV file in the `output` directory. The CSV file should contain at least these columns:
+   - `Company Name`: Name of the company
+   - `Website`: Company's website URL
 
-```json
-[
-  "https://example.com",
-  "https://example.org"
-]
+Example CSV format:
+```csv
+Company Name,Website
+Example Corp,https://example.com
+Test Company,https://test-company.com
 ```
 
-5. Run the script:
+2. Run the script:
 
 ```bash
 python3 src/main.py
 ```
+
+## CSV Processing Details
+
+The script will:
+
+- The tool processes the most recent CSV file in the `output` directory
+- The original file is updated in-place with email data
+- If a website already has an associated email, it will be updated if a better match is found
+- Failed email extractions will be logged but won't affect other entries

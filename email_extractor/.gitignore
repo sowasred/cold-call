@@ -2,3 +2,4 @@ node_modules
 venv/
 logs/
 __pycache__/
+output/
