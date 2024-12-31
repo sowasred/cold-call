@@ -37,6 +37,14 @@ The scraper uses a JSON configuration file (`config/categories.json`) to define 
 
 ## Usage
 
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+
+deactivate
+
+pip freeze > requirements.txt
+
 Run the scraper using:
 ```bash
 python src/main.py
