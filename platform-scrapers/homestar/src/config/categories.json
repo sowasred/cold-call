@@ -1,0 +1,28 @@
+{
+    "request_id": "8f628938-3849-4525-833f-246142aa9963",
+    "status": "completed",
+    "website_url": "https://homestars.com/categories",
+    "user_prompt": "I'd like to get whole category names and all of the subcategory names under each one basically a json file {\"cat1\":[ {\"subcat1\":\"link\"}], \"cat2\":[{\"subcat2\":\"link2\"},{\"subcat3\":\"link3\"}]",
+    "result": {
+      "Construction & Renovations": [
+        {
+          "Bathroom renovation": "https://homestars.com/on/toronto/bathroom-renovation"
+        },
+        {
+          "Demolition": "https://homestars.com/on/toronto/demolition"
+        },
+        {
+          "Kitchen planning & renovation": "https://homestars.com/on/toronto/kitchen-planning-renovation"
+        }
+      ],
+      "Architects, Builders & Engineers": [
+        {
+          "Architects": "https://homestars.com/on/toronto/architects"
+        },
+        {
+          "Builders": "https://homestars.com/on/toronto/builders"
+        }
+      ]
+    }, 
+    "error": ""
+}

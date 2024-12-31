@@ -5,7 +5,30 @@ from scraper import (
     extract_companies,
     fetch_company_details,
 )
+import pandas as pd
 import os
+from datetime import datetime
+
+
+def format_company_data(companies, company_details):
+    formatted_data = []
+    # Convert company_details list to a dictionary with company names as keys
+    company_details_dict = {company['name']: company for company in company_details}
+    
+    for company in companies:
+        company_info = company_details_dict.get(company['name'], {})
+        row = {
+            'Company Name': company['name'],
+            'Category': company.get('category', ''),
+            'Subcategory': company.get('subcategory', ''),
+            'Phone': company_info.get('phone_number', ''),
+            'Email': company_info.get('email', ''),
+            'Address': company_info.get('address', ''),
+            'Website': company_info.get('website', ''),
+            'Rating': company_info.get('score', ''),
+        }
+        formatted_data.append(row)
+    return formatted_data
 
 
 def main():
@@ -27,6 +50,7 @@ def main():
     print("logger info")
     # Initialize WebDriver
     driver = initialize_driver()
+    all_company_data = []
     try:
         for category, subcategories in categories.items():
             logger.info(f"Processing category: {category}")
@@ -52,6 +76,19 @@ def main():
                 company_details = fetch_company_details(driver, companies)
                 print("company details fetched")
                 print(company_details)
+                formatted_data = format_company_data(companies, company_details)
+                for row in formatted_data:
+                    row['Category'] = category
+                    row['Subcategory'] = name
+                all_company_data.extend(formatted_data)
+            print("all company data")
+            print(all_company_data)
+            os.makedirs("output", exist_ok=True)
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            output_file = f"output/homestar_data_{timestamp}.csv"
+            df = pd.DataFrame(all_company_data)
+            df.to_csv(output_file, index=False)
+            logger.info(f"Data saved to {output_file}")
     finally:
         driver.quit()
         logger.info("Scraper finished.")

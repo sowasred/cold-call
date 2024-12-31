@@ -80,7 +80,7 @@ def fetch_company_details(driver, company_name_urls):
             logger.info(f"Page Title: {driver.title}")
             
             # Stop here for inspection
-            input("Press Enter to continue after inspecting the page...")
+            # input("Press Enter to continue after inspecting the page...")
             
             # Check if we can find any main content
             try:
