@@ -17,6 +17,7 @@ def format_company_data(companies, company_details):
     
     for company in companies:
         company_info = company_details_dict.get(company['name'], {})
+        social_links = company_info.get('social_links', {})
         row = {
             'Company Name': company['name'],
             'Category': company.get('category', ''),
@@ -25,6 +26,10 @@ def format_company_data(companies, company_details):
             'Email': company_info.get('email', ''),
             'Address': company_info.get('address', ''),
             'Website': company_info.get('website', ''),
+            'Instagram': social_links.get('instagram', ''),
+            'Facebook': social_links.get('facebook', ''),
+            'Twitter': social_links.get('twitter', ''),
+            'LinkedIn': social_links.get('linkedin', ''),
             'Rating': company_info.get('score', ''),
         }
         formatted_data.append(row)
