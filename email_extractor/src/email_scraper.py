@@ -2,17 +2,20 @@ from selenium.webdriver.common.by import By
 import logging
 import re
 from email_processor import EmailProcessor
+from base_scraper import BaseScraper
+from typing import Set, Optional
 
 logger = logging.getLogger(__name__)
 
 
-class WebEmailScraper:
+class WebEmailScraper(BaseScraper):
     """A class to handle email extraction from web pages."""
 
     def __init__(self, driver):
         """Initialize the extractor with a webdriver instance."""
-        self.driver = driver
+        super().__init__(driver)
         self.email_regex = re.compile(r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}")
+        self.email_processor = EmailProcessor()
         self.contact_page_keywords = [
             "contact",
             "about",
@@ -45,52 +48,17 @@ class WebEmailScraper:
             logger.debug(f"Error finding contact pages: {str(e)}")
             return []
 
-    def scrape_emails_strategically(self, target_url):
-        """
-        Strategic email extraction with processing.
-
-        Args:
-            base_url: Target URL to scrape
-
-        Returns:
-            tuple: (best_email, source_url) where best_email might be None
-        """
-        logger.info(f"Checking main page: {target_url}")
-
-        email_processor = EmailProcessor()
-
-        # Check main page first
-        self.driver.get(target_url)
-        main_page_emails = self._collect_emails_from_page()
-
-        if main_page_emails:
-            best_email = email_processor.process_emails(main_page_emails, target_url)
-            if best_email:
-                logger.info(f"Found best email: {best_email} at {target_url}")
-                return best_email, target_url
-
-        # Check contact pages if no suitable email found
-        contact_links = self.find_potential_contact_pages()
-
-        for link in contact_links:
-            logger.info(f"Checking contact page: {link}")
-            self.driver.get(link)
-            contact_page_emails = self._collect_emails_from_page()
-
-            if contact_page_emails:
-                best_email = email_processor.process_emails(contact_page_emails, link)
-                if best_email:
-                    return best_email, link
-
-        return None, target_url
-
-    def _collect_emails_from_page(self):
-        """Aggregate emails found through all extraction methods."""
+    def _collect_from_page(self) -> Set[str]:
+        """Implementation of abstract method for emails."""
         emails = set()
         emails.update(self._extract_emails_from_text())
         emails.update(self._extract_emails_from_source())
         emails.update(self._extract_emails_from_elements())
-        return list(emails)
+        return emails
+
+    def _process_results(self, emails: Set[str], source_url: str) -> Optional[str]:
+        """Implementation of abstract method for email processing."""
+        return self.email_processor.process_emails(list(emails), source_url)
 
     def _extract_emails_from_text(self):
         """Extract email addresses from visible page text."""

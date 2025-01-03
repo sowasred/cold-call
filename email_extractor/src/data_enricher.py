@@ -3,10 +3,11 @@ import logging
 from pathlib import Path
 from typing import Optional
 from email_scraper import WebEmailScraper
+from phone_scraper import WebPhoneScraper
 
 logger = logging.getLogger(__name__)
 
-class HomestarEmailEnricher:
+class HomestarDataEnricher:
     """Enriches Homestar company data with email addresses."""
     
     def __init__(self, driver, input_csv_path: str):
@@ -19,54 +20,46 @@ class HomestarEmailEnricher:
         """
         self.driver = driver
         self.email_scraper = WebEmailScraper(driver)
+        self.phone_scraper = WebPhoneScraper(driver)
         self.df = pd.read_csv(input_csv_path)
         
-    def process_companies(self) -> pd.DataFrame:
-        """
-        Process all companies in the CSV and find their emails.
-        
-        Returns:
-            DataFrame with enriched email data
-        """
-        logger.info(f"Processing {len(self.df)} companies")
-        
+    def process_companies(self):
+        """Process all companies in the dataset."""
         # Process only companies with valid websites
-        self.df['Email'] = self.df.apply(
-            lambda row: self._process_single_company(row)
-            if pd.notna(row['Website']) else None,
+        results = self.df.apply(
+            lambda row: pd.Series(self._process_single_company(row))
+            if pd.notna(row['Website']) else pd.Series({'Email': None, 'Phone': None}),
             axis=1
         )
         
-        return self.df
+        # Update the dataframe with results
+        self.df['Email'] = results['Email']
+        self.df['Phone'] = results['Phone']
     
-    def _process_single_company(self, row: pd.Series) -> Optional[str]:
-        """
-        Process a single company and find its email.
-        
-        Args:
-            row: DataFrame row containing company data
-            
-        Returns:
-            str: Best matching email if found, None otherwise
-        """
-        company_name = row['Company Name']
+    def _process_single_company(self, row: pd.Series) -> dict:
+        """Process a single company and return its contact information."""
         website = row['Website']
-        
-        logger.info(f"Processing {company_name} at {website}")
+        company_name = row['Company Name']
         
         try:
-            email, source_url = self.email_scraper.scrape_emails_strategically(website)
-            if email:
-                logger.info(f"Found email {email} for {company_name}")
-                return email
-            else:
-                logger.warning(f"No email found for {company_name}")
-                return None
+            # Extract email
+            email, _ = self.email_scraper.scrape_strategically(website)
+            
+            # Extract phone
+            phone, _ = self.phone_scraper.scrape_strategically(website)
                 
+            return {
+                'Email': email,
+                'Phone': phone
+            }
+            
         except Exception as e:
             logger.error(f"Error processing {company_name}: {str(e)}")
-            return None
-    
+            return {
+                'Email': None,
+                'Phone': None
+            }
+
     def save_results(self, output_path: Optional[str] = None) -> None:
         """
         Save the enriched data to a new CSV file.

@@ -2,7 +2,7 @@ import logging
 import os
 from datetime import datetime
 import undetected_chromedriver as uc
-from email_enricher import HomestarEmailEnricher
+from data_enricher import HomestarDataEnricher
 import pandas as pd
 
 def setup_logger(log_dir):
@@ -86,7 +86,7 @@ def main():
         
         # Create enricher instance and process
         try:
-            enricher = HomestarEmailEnricher(driver, input_path)
+            enricher = HomestarDataEnricher(driver, input_path)
             enricher.process_companies()
             
             # Save results back to the same file
