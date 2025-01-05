@@ -49,3 +49,4 @@ This project uses multiple AI agents working together to:
 - pandas
 - requests
 
+## Installation
