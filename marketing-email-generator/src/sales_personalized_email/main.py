@@ -18,6 +18,14 @@ def run():
         "title": "<PROSPECT_TITLE>",
         "company": "<PROSPECT_COMPANY>",
         "industry": "<PROSPECT_INDUSTRY>",
+        "company_category": "<PROSPECT_COMPANY_CATEGORY>",
+        "company_subcategory": "<PROSPECT_COMPANY_SUBCATEGORY>",
+        "company_website": "<PROSPECT_COMPANY_WEBSITE>",
+        "company_phone": "<PROSPECT_COMPANY_PHONE>",
+        "company_email": "<PROSPECT_COMPANY_EMAIL>",
+        "facebook_url": "<PROSPECT_FACEBOOK_URL>",
+        "instagram_url": "<PROSPECT_INSTAGRAM_URL>",
+        "twitter_url": "<PROSPECT_TWITTER_URL>",
         "linkedin_url": "<PROSPECT_LINKEDIN_URL>",
         "our_product": "<OUR_PRODUCT>",
     }
@@ -53,7 +61,7 @@ def test():
     """
     Test the crew execution and returns the results.
     """
-    inputs = {"topic": "AI LLMs"}
+    inputs = {"company_name": "AI LLMs"}
     try:
         SalesPersonalizedEmailCrew().crew().test(
             n_iterations=int(sys.argv[1]), openai_model_name=sys.argv[2], inputs=inputs
