@@ -15,7 +15,7 @@ def run():
     """
     inputs = {
         "name": "<PROSPECT_NAME>",
-        "title": "<PROSPECT_TITLE>",
+        "title": "<PROSPECT_TITLE>", 
         "company": "<PROSPECT_COMPANY>",
         "industry": "<PROSPECT_INDUSTRY>",
         "company_category": "<PROSPECT_COMPANY_CATEGORY>",
@@ -28,6 +28,9 @@ def run():
         "twitter_url": "<PROSPECT_TWITTER_URL>",
         "linkedin_url": "<PROSPECT_LINKEDIN_URL>",
         "our_product": "<OUR_PRODUCT>",
+        "sender_company": "<SENDER_COMPANY>",
+        "sender_company_website": "<SENDER_COMPANY_WEBSITE>",
+        "sender_email": "<SENDER_EMAIL>",
     }
     SalesPersonalizedEmailCrew().crew().kickoff(inputs=inputs)
 
