@@ -1,38 +1,49 @@
 research_prospect_task:
   description: >
-    Conduct thorough research on {name}, their role as
-    {title} at {company}, and the company itself.
+    Conduct thorough research on the prospect's company ({company}).
     Look for recent news, achievements, challenges, or interests related to
-    {name} or their company in the {industry} industry.
-    Use their LinkedIn profile ({linkedin_url}) and other publicly
-    available sources to gather relevant information.
+    the company in the {industry} industry.
+    Use their company website ({company_website}), LinkedIn ({linkedin_url}),
+    Facebook ({facebook_url}), Instagram ({instagram_url}), and Twitter ({twitter_url})
+    to gather relevant information. Pay special attention to their industry ({industry}),
+    company category ({company_category}), and subcategory ({company_subcategory}).
   expected_output: >
-    A detailed dossier on {name} and {company},
-    including recent professional activities, potential pain points, interests,
+    A detailed dossier on {company}, including recent activities, potential pain points,
+    company culture, contact information (phone: {company_phone}, email: {company_email}),
     and any other information that could be used to personalize communication.
 
 personalize_content_task:
   description: >
-    Using the research on {name} and {company},
-    identify specific ways that {our_product} can address their potential needs
-    or align with their professional interests. Look for unique angles or shared
-    points of interest that can be used to create a strong personal connection
-    in the email.
+    Using the research on {company} in the {industry} industry,
+    identify specific ways that our company ({sender_company}) can address their potential needs
+    or align with their business goals. Look for unique angles or shared
+    points of interest that can be used to create a strong connection
+    in the email. Consider their company category ({company_category}) and
+    subcategory ({company_subcategory}) to tailor the messaging. Use our company summary
+    ({our_company_summary}) to find relevant alignment points and value propositions.
   expected_output: >
     A list of personalized talking points and angles to use in the email,
-    connecting {name}'s background, interests, or challenges
-    with the benefits of {our_product}.
+    connecting {company}'s business context, industry challenges, and goals
+    with the benefits that {sender_company} can provide. Include relevant details
+    from their social media presence and website to demonstrate thorough research.
 
 write_email_task:
   description: >
-    Craft a highly personalized email to {name} about {our_product}.
-    Use the research and personalized content to create an email that feels
-    individual, relevant, and engaging. The email should demonstrate understanding
-    of their role and challenges, showcase how {our_product} can provide value,
-    and invite further conversation.
+    Craft a highly personalized email to {company} based on the research and personalization insights.
+    Use the research findings about their industry ({industry}), company category ({company_category}),
+    and recent activities to create an email that demonstrates deep understanding. Incorporate elements
+    from {sender_company}'s value proposition ({our_company_summary}) to show clear alignment and value.
+    The email should reference specific details from their digital presence ({company_website}, social media)
+    to prove thorough research while maintaining a professional yet conversational tone.
   expected_output: >
     A PersonalizedEmail object containing:
-    1. A compelling, personalized subject line
-    2. The body of the email, written in a conversational yet professional tone
-    3. Follow-up notes for the sales person, suggesting potential talking points
-       for future interactions
+    1. A compelling subject line that references specific research insights about {company}
+    2. A carefully crafted email body that:
+       - Demonstrates understanding of {company}'s position in the {industry} industry
+       - References relevant details from their online presence and recent activities
+       - Clearly articulates how {sender_company} can provide value based on their needs
+       - Includes a clear call-to-action for next steps
+    3. Strategic follow-up notes highlighting:
+       - Key talking points based on the research
+       - Potential objections and how to address them
+       - Suggested next steps for relationship building
