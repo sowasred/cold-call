@@ -18,6 +18,7 @@ class PhoneProcessor:
             "0000000000",
             "1111111111",
             "0123456789",
+            "0102030405"
         }
 
     def clean_and_validate_phone(self, raw_phone: str) -> Optional[str]:

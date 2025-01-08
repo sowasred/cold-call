@@ -16,37 +16,6 @@ class WebEmailScraper(BaseScraper):
         super().__init__(driver)
         self.email_regex = re.compile(r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}")
         self.email_processor = EmailProcessor()
-        self.contact_page_keywords = [
-            "contact",
-            "about",
-            "reach-us",
-            "get-in-touch",
-            "connect",
-            "support",
-            "kontakt",
-            "contact-us",
-        ]
-
-    def find_potential_contact_pages(self):
-        """Find URLs that likely contain contact information."""
-        potential_pages = []
-        try:
-            page_links = self.driver.find_elements(By.TAG_NAME, "a")
-            for link in page_links:
-                try:
-                    href = link.get_attribute("href")
-                    link_text = link.text.lower()
-                    if href and any(
-                        keyword in href.lower() or keyword in link_text
-                        for keyword in self.contact_page_keywords
-                    ):
-                        potential_pages.append(href)
-                except Exception:
-                    continue
-            return potential_pages
-        except Exception as e:
-            logger.debug(f"Error finding contact pages: {str(e)}")
-            return []
 
     def _collect_from_page(self) -> Set[str]:
         """Implementation of abstract method for emails."""
