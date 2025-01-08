@@ -31,24 +31,20 @@ class PhoneProcessor:
             Cleaned phone if valid, None otherwise
         """
         try:
-            # Remove all non-numeric characters except + for international prefix
-            candidate = re.sub(r'[^\d+]', '', raw_phone)
+            # Remove all non-numeric characters
+            candidate = re.sub(r'[^\d]', '', raw_phone)
             
             logger.info(f"Cleaning phone: {candidate}")
+            
+            # If 11 digits and starts with 1, remove the 1
+            if len(candidate) == 11 and candidate.startswith('1'):
+                candidate = candidate[1:]
             
             # Basic validation
             if not self._is_valid_phone(candidate):
                 return None
                 
-            # Format number consistently
-            # Keep + prefix if exists, otherwise assume local number
-            if candidate.startswith('+'):
-                formatted = candidate
-            else:
-                # You might want to add default country code here
-                formatted = candidate
-                
-            return formatted
+            return candidate
 
         except Exception as e:
             logger.debug(f"Error cleaning phone {raw_phone}: {str(e)}")
@@ -56,23 +52,13 @@ class PhoneProcessor:
 
     def _is_valid_phone(self, phone: str) -> bool:
         """
-        Validate phone number format and check against known invalid numbers.
-
-        Args:
-            phone: Phone number to validate
-
-        Returns:
-            bool: True if phone is valid, False otherwise
+        Validate phone number format specifically for Canadian numbers.
         """
-        # Remove any non-digit characters except + for checking length
-        digits_only = re.sub(r'[^\d+]', '', phone)
+        # Remove any non-digit characters
+        digits_only = re.sub(r'[^\d]', '', phone)
         
-        # Basic validation rules
-        if not digits_only:
-            return False
-            
-        # Check minimum/maximum length (adjust these values based on your needs)
-        if len(digits_only) < 10 or len(digits_only) > 15:
+        # Must be exactly 10 digits for Canadian numbers
+        if len(digits_only) != 10:
             return False
             
         # Check against known invalid numbers
@@ -83,46 +69,10 @@ class PhoneProcessor:
 
     def select_best_phone(self, phones: Set[str], page_url: str) -> Optional[str]:
         """
-        Select the best phone number from a set of candidates.
-
-        Args:
-            phones: Set of validated phone numbers
-            page_url: URL of the page where phones were found
-
-        Returns:
-            str: Best matching phone or None if no suitable phone found
+        For Canadian numbers, we can simply return the first valid number
+        since they'll all be in the same format.
         """
-        if not phones:
-            return None
-
-        # Priority scoring for phone numbers
-        scored_phones = []
-        for phone in phones:
-            score = 0
-            
-            # Prefer international format
-            if phone.startswith('+'):
-                score += 50
-                
-            # Prefer longer numbers (more likely to be complete)
-            digits = len(re.sub(r'[^\d]', '', phone))
-            if digits >= 11:  # International format with country code
-                score += 30
-            elif digits == 10:  # Local format
-                score += 20
-                
-            # Avoid obviously fake numbers
-            if any(phone.endswith(str(i * 4)) for i in range(10)):
-                score -= 50
-                
-            scored_phones.append((phone, score))
-
-        # Sort by score and return the highest scoring phone
-        if scored_phones:
-            return sorted(scored_phones, key=lambda x: x[1], reverse=True)[0][0]
-
-        # If no scoring criteria met, return the first phone
-        return list(phones)[0]
+        return next(iter(phones)) if phones else None
 
     def process_phones(self, raw_phones: List[str], page_url: str) -> Optional[str]:
         """

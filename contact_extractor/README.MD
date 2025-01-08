@@ -6,14 +6,14 @@ A Python-based web scraping tool that strategically extracts and validates busin
 
 - Automated contact information extraction from websites
   - Email addresses
-  - Phone numbers
+  - Phone numbers (Canadian 10-digit format)
 - Smart contact page detection and prioritization
 - Comprehensive validation and cleaning
   - Email format and domain validation with MX record verification
-  - Phone number format validation with international support
+  - Canadian phone number format validation
 - Priority-based selection system
   - Business-relevant email addresses (e.g., info@, contact@)
-  - Complete international phone numbers
+  - Standard Canadian phone number format (XXX-XXX-XXXX)
 - Anti-detection measures using undetected-chromedriver
 - Detailed logging system
 - In-place CSV enrichment with contact data
@@ -85,8 +85,8 @@ The tool employs a strategic approach to contact information extraction:
      - Verifies MX records
      - Filters disposable and test addresses
    - **Phone Numbers**:
-     - Supports international and local formats
-     - Validates number length and structure
+     - Validates Canadian 10-digit format
+     - Handles numbers with leading '1'
      - Filters test and invalid numbers
 
 4. **Priority Selection**
@@ -94,10 +94,10 @@ The tool employs a strategic approach to contact information extraction:
      - Domain match with website
      - Business-relevant patterns
      - Valid MX records
-   - **Phone Numbers**: Prioritizes based on:
-     - International format completeness
-     - Number length and validity
-     - Business context
+   - **Phone Numbers**:
+     - Ensures standard Canadian format
+     - Removes leading '1' if present
+     - Filters invalid and test numbers
 
 ## CSV Processing Details
 
