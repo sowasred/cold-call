@@ -21,6 +21,17 @@ class EmailProcessor:
             "example.com",
             "test.com",
         }
+        
+        # Add website builder domains
+        self.website_builder_domains = {
+            "wixpress.com",
+            "squarespace.com",
+            "weebly.com",
+            "webflow.com",
+            "shopify.com",
+            "sentry.wixpress.com",
+            "wordpress.com",
+        }
 
     def clean_and_validate_email(self, raw_email: str) -> Optional[str]:
         """
@@ -50,7 +61,7 @@ class EmailProcessor:
 
     def _is_valid_email(self, email: str) -> bool:
         """
-        Validate email format and check for disposable domains.
+        Validate email format and check for disposable and website builder domains.
 
         Args:
             email: Email address to validate
@@ -63,7 +74,11 @@ class EmailProcessor:
             return False
 
         domain = email.split("@")[1]
-        if domain in self.disposable_domains:
+        
+        # Check both disposable and website builder domains
+        if (domain in self.disposable_domains or 
+            domain in self.website_builder_domains or
+            any(builder in domain for builder in self.website_builder_domains)):
             return False
 
         return True
