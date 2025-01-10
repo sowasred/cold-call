@@ -37,13 +37,10 @@ write_email_task:
     to prove thorough research while maintaining a professional yet conversational tone.
   expected_output: >
     A PersonalizedEmail object containing:
-    1. A compelling subject line that references specific research insights about {company}
+    1. A compelling subject line that demonstrates research insights and value proposition
     2. A carefully crafted email body that:
-       - Demonstrates understanding of {company}'s position in the {industry} industry
-       - References relevant details from their online presence and recent activities
-       - Clearly articulates how {sender_company} can provide value based on their needs
-       - Includes a clear call-to-action for next steps
-    3. Strategic follow-up notes highlighting:
-       - Key talking points based on the research
-       - Potential objections and how to address them
-       - Suggested next steps for relationship building
+       - Shows deep understanding of the prospect's business and industry context
+       - References specific details from their online presence and recent activities
+       - Clearly articulates concrete value propositions and benefits
+       - Includes a clear, actionable call-to-action for next steps
+       - Contains no placeholder text or variables in the final output
