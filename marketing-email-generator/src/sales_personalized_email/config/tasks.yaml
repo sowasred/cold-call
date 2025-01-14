@@ -29,18 +29,27 @@ personalize_content_task:
 
 write_email_task:
   description: >
-    Craft a highly personalized email to {company} based on the research and personalization insights.
+    Craft a concise, personalized email (300-500 words) to {company} based on the research and personalization insights.
     Use the research findings about their industry ({industry}), company category ({company_category}),
     and recent activities to create an email that demonstrates deep understanding. Incorporate elements
     from {sender_company}'s value proposition ({our_company_summary}) to show clear alignment and value.
     The email should reference specific details from their digital presence ({company_website}, social media)
     to prove thorough research while maintaining a professional yet conversational tone.
+    IMPORTANT: Use the exact sender information provided:
+    - Sender Name: Ozan Muldur
+    - Title: Business Development Engineer
+    - Company: Techfi
+    - Phone: (705) 791-7718
+    - Email: ozan@techfi.ca
+    - Website: https://techfi.ca
   expected_output: >
     A PersonalizedEmail object containing:
-    1. A compelling subject line that demonstrates research insights and value proposition
-    2. A carefully crafted email body that:
+    1. A compelling subject line that demonstrates research insights and value proposition (max 60 chars)
+    2. A concise email body (300-500 words) that:
        - Shows deep understanding of the prospect's business and industry context
-       - References specific details from their online presence and recent activities
-       - Clearly articulates concrete value propositions and benefits
-       - Includes a clear, actionable call-to-action for next steps
-       - Contains no placeholder text or variables in the final output
+       - References specific details from their online presence and recent activities 
+       - Clearly articulates 2-3 key value propositions and benefits
+       - Includes a clear call-to-action for next steps
+       - Uses the exact sender contact information provided
+       - Contains no placeholder text or template variables
+

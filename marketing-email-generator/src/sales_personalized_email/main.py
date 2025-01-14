@@ -29,6 +29,9 @@ def run():
         "sender_company": "Techfi",
         "sender_company_website": "https://techfi.ca",
         "sender_email": "hello@techfi.ca",
+        "sender_fullname": "Ozan Muldur",
+        "sender_title": "Business Development Engineer",
+        "sender_phone": "(705) 791-7718",
     }
     SalesPersonalizedEmailCrew().crew().kickoff(inputs=inputs)
 
