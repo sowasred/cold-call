@@ -42,10 +42,12 @@ write_email_task:
     - Phone: {sender_phone}
     - Email: {sender_email}
     - Website: {sender_website}
+    - Recipient Email: {email}
   expected_output: >
-    A PersonalizedEmail object containing:
-    1. A compelling subject line that demonstrates research insights and value proposition (max 60 chars)
-    2. A concise email body (300-500 words) that:
+    An EmailOutput object containing a list of PersonalizedEmail objects, each with:
+    1. The recipient's email address in the 'to' field
+    2. A compelling subject line that demonstrates research insights and value proposition (max 60 chars)
+    3. A concise email body (300-500 words) that:
        - Shows deep understanding of the prospect's business and industry context
        - References specific details from their online presence and recent activities 
        - Clearly articulates 2-3 key value propositions and benefits

@@ -65,7 +65,26 @@ To generate personalized emails for your target companies:
 uv run sales_personalized_email input/targets.csv input/sender.csv
 ```
 
-This will process each company in `targets.csv` using the sender information from `sender.csv` and generate personalized emails.
+This will:
+
+1. Process each company in `targets.csv`
+2. Use sender information from `sender.csv`
+3. Generate personalized emails
+4. Save results in `output/personalized_email.json`
+
+### Output Structure
+
+```json
+{
+  "emails": [
+    {
+      "to": "recipient@example.com",
+      "subject_line": "Compelling subject line",
+      "email_body": "Personalized email content..."
+    }
+  ]
+}
+```
 
 ## Documentation
 

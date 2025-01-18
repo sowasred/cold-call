@@ -1,13 +1,19 @@
 from crewai_tools import ScrapeWebsiteTool, SerperDevTool
 from pydantic import BaseModel
+from typing import List
+import os
 
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 
 
 class PersonalizedEmail(BaseModel):
+    to: str
     subject_line: str
     email_body: str
+
+class EmailOutput(BaseModel):
+    emails: List[PersonalizedEmail]
 
 @CrewBase
 class SalesPersonalizedEmailCrew:
@@ -15,6 +21,7 @@ class SalesPersonalizedEmailCrew:
 
     agents_config = "config/agents.yaml"
     tasks_config = "config/tasks.yaml"
+    output_file = os.path.join("output", "personalized_email.json")
 
     @agent
     def prospect_researcher(self) -> Agent:
@@ -65,16 +72,16 @@ class SalesPersonalizedEmailCrew:
         return Task(
             config=self.tasks_config["write_email_task"],
             agent=self.email_copywriter(),
-            output_json=PersonalizedEmail,
-            output_file="personalized_email.md",
+            output_json=EmailOutput,
+            output_file=self.output_file,
         )
 
     @crew
     def crew(self) -> Crew:
         """Creates the SalesPersonalizedEmail crew"""
         return Crew(
-            agents=self.agents,  # Automatically created by the @agent decorator
-            tasks=self.tasks,  # Automatically created by the @task decorator
+            agents=self.agents,
+            tasks=self.tasks,
             process=Process.sequential,
             verbose=True,
             # process=Process.hierarchical, # In case you wanna use that instead https://docs.crewai.com/how-to/Hierarchical/
