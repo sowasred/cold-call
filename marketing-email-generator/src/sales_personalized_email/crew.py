@@ -18,9 +18,12 @@ class SalesPersonalizedEmailCrew:
 
     @agent
     def prospect_researcher(self) -> Agent:
+        scrape_tool = ScrapeWebsiteTool()
+        serper_tool = SerperDevTool()
+        
         return Agent(
             config=self.agents_config["prospect_researcher"],
-            tools=[SerperDevTool(), ScrapeWebsiteTool()],
+            tools=[scrape_tool, serper_tool],
             allow_delegation=False,
             verbose=True,
         )

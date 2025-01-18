@@ -1,44 +1,14 @@
 #!/usr/bin/env python
+# Disable OTEL SDK
+import os
+os.environ["OTEL_SDK_DISABLED"] = "true"
 import sys
-import csv
 from sales_personalized_email.crew import SalesPersonalizedEmailCrew
-
-# This main file is intended to be a way for your to run your
-# crew locally, so refrain from adding necessary logic into this file.
-# Replace with inputs you want to test with, it will automatically
-# interpolate any tasks and agents information
-
-
-def load_sender_info(sender_csv_path: str) -> dict:
-    """
-    Load sender company information from a CSV file.
-    
-    Args:
-        sender_csv_path: Path to the sender information CSV file
-        
-    Returns:
-        Dictionary containing sender company information
-    """
-    try:
-        with open(sender_csv_path, mode='r', encoding='utf-8') as file:
-            reader = csv.DictReader(file)
-            # Assuming first row contains the sender information
-            sender_info = next(reader)
-            return {k: v.strip() for k, v in sender_info.items() if v and v.strip()}
-            
-    except FileNotFoundError:
-        raise FileNotFoundError(f"Sender CSV file not found: {sender_csv_path}")
-    except Exception as e:
-        raise Exception(f"Error loading sender information: {e}")
+from sales_personalized_email.data_loader import load_sender_info, load_target_info
 
 def run():
     """
     Run the crew for multiple companies from CSV files.
-    Processes target companies using sender company information.
-    
-    Required files:
-    - targets.csv: Contains information about target companies
-    - sender.csv: Contains information about the sender company
     
     Usage:
     python main.py targets.csv sender.csv
@@ -48,39 +18,34 @@ def run():
         targets_csv = sys.argv[1] if len(sys.argv) > 1 else "targets.csv"
         sender_csv = sys.argv[2] if len(sys.argv) > 2 else "sender.csv"
         
-        # Load sender information first
+        # Load data using the data_loader functions
         sender_info = load_sender_info(sender_csv)
         
-        # Process target companies
-        with open(targets_csv, mode='r', encoding='utf-8') as file:
-            reader = csv.DictReader(file)
-            
-            for row_num, target_data in enumerate(reader, start=1):
-                try:
-                    print(f"\nProcessing company {row_num}: {target_data.get('company', 'Unknown')}")
+        # Load and process target companies
+        targets = load_target_info(targets_csv)
+        
+        # Process each target company
+        for idx, target_data in enumerate(targets, start=1):
+            try:
+                print(f"\nProcessing company {idx}: {target_data.get('company', 'Unknown')}")
+                
+                # Combine target and sender information
+                inputs = {**target_data, **sender_info}
+                
+                # Debug print
+                print("\nFinal combined inputs:")
+                for key, value in inputs.items():
+                    print(f"{key}: {value!r}")
+                
+                # Generate email
+                SalesPersonalizedEmailCrew().crew().kickoff(inputs=inputs)
+                
+            except Exception as company_error:
+                print(f"Error processing company {idx}: {str(company_error)}")
+                continue
                     
-                    # Clean target company data
-                    cleaned_target = {
-                        key: value.strip() 
-                        for key, value in target_data.items() 
-                        if value and value.strip()
-                    }
-                    
-                    # Combine target and sender information
-                    inputs = {**cleaned_target, **sender_info}
-                    
-                    # Generate email
-                    SalesPersonalizedEmailCrew().crew().kickoff(inputs=inputs)
-                    
-                except Exception as company_error:
-                    print(f"Error processing company {row_num}: {company_error}")
-                    continue  # Continue with next company if one fails
-                    
-    except FileNotFoundError as e:
-        print(f"File not found: {e}")
-        sys.exit(1)
     except Exception as e:
-        print(f"Error processing files: {e}")
+        print(f"Error: {e}")
         sys.exit(1)
 
 def train():
@@ -96,7 +61,6 @@ def train():
     except Exception as e:
         raise Exception(f"An error occurred while training the crew: {e}")
 
-
 def replay():
     """
     Replay the crew execution from a specific task.
@@ -106,7 +70,6 @@ def replay():
 
     except Exception as e:
         raise Exception(f"An error occurred while replaying the crew: {e}")
-
 
 def test():
     """

@@ -10,3 +10,7 @@
 ## Ozan Todos
 [ ] - Send email script out of personalized_email json file
 [ ] - Orchestration of all the projects in the repo
+
+
+# Future Improvements
+[ ] - [Configure OpenTelemetry for performance monitoring](https://docs.crewai.com/how-to/openlit-observability)
