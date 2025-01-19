@@ -1,6 +1,6 @@
 #!/usr/bin/env python
-# Disable OTEL SDK
 import os
+# disable opentelemetry
 os.environ["OTEL_SDK_DISABLED"] = "true"
 import sys
 from sales_personalized_email.crew import SalesPersonalizedEmailCrew
