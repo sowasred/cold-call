@@ -7,7 +7,7 @@ from phone_scraper import WebPhoneScraper
 
 logger = logging.getLogger(__name__)
 
-class HomestarDataEnricher:
+class CsvDataEnricher:
     """Enriches Homestar company data with email addresses."""
     
     def __init__(self, driver, input_csv_path: str):
