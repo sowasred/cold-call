@@ -74,11 +74,11 @@ def main():
         driver = initialize_driver()
         
         # Find and validate input file
-        output_dir = "output"
-        os.makedirs(output_dir, exist_ok=True)
+        input_dir = "input"
+        os.makedirs(input_dir, exist_ok=True)
         
         try:
-            input_path = find_latest_csv(output_dir)
+            input_path = find_latest_csv(input_dir)
             logger.info(f"Processing file: {input_path}")
         except FileNotFoundError as e:
             logger.error(f"Failed to find input CSV: {e}")
