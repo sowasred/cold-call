@@ -1,4 +1,4 @@
-# SalesPersonalizedEmail Crew
+# Marketing Email Generator Crew
 
 This project uses multiple AI agents working together to research and analyze target companies and generate personalized, compelling email content, leveraging the powerful and flexible framework powered by [crewAI](https://crewai.com).
 
@@ -52,17 +52,19 @@ uv sync
 
 1. Add your `OPENAI_API_KEY` into the `.env` file
 
-2. Optional Customization:
-   - Modify `src/sales_personalized_email/config/agents.yaml` to define your agents
-   - Modify `src/sales_personalized_email/config/tasks.yaml` to define your tasks
-   - Modify `src/sales_personalized_email/crew.py` to add your own logic, tools and specific args
+2. Create a output directory in the root of the project
+
+3. Optional Customization:
+   - Modify `src/config/agents.yaml` to define your agents
+   - Modify `src/config/tasks.yaml` to define your tasks
+   - Modify `src/crew.py` to add your own logic, tools and specific args
 
 ## Running the Project
 
 To generate personalized emails for your target companies:
 
 ```bash
-uv run sales_personalized_email input/targets.csv input/sender.csv
+uv run marketing-email-generator input/targets.csv input/sender.csv
 ```
 
 This will:

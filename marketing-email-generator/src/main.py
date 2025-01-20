@@ -1,10 +1,11 @@
 #!/usr/bin/env python
+# Disable OTEL SDK
 import os
-# disable opentelemetry
 os.environ["OTEL_SDK_DISABLED"] = "true"
 import sys
-from sales_personalized_email.crew import SalesPersonalizedEmailCrew
-from sales_personalized_email.data_loader import load_sender_info, load_target_info
+from crew import MarketingEmailGeneratorCrew
+from data_loader import load_sender_info, load_target_info
+from config.llm_config import LLMProvider
 
 def run():
     """
@@ -23,6 +24,7 @@ def run():
         
         # Load and process target companies
         targets = load_target_info(targets_csv)
+
         
         # Process each target company
         for idx, target_data in enumerate(targets, start=1):
@@ -37,8 +39,8 @@ def run():
                 for key, value in inputs.items():
                     print(f"{key}: {value!r}")
                 
-                # Generate email
-                SalesPersonalizedEmailCrew().crew().kickoff(inputs=inputs)
+                # Initialize crew with specific provider and generate email
+                MarketingEmailGeneratorCrew(llm_provider=LLMProvider.OLLAMA).crew().kickoff(inputs=inputs)
                 
             except Exception as company_error:
                 print(f"Error processing company {idx}: {str(company_error)}")
@@ -54,7 +56,7 @@ def train():
     """
     inputs = {"topic": "AI LLMs"}
     try:
-        SalesPersonalizedEmailCrew().crew().train(
+        MarketingEmailGeneratorCrew().crew().train(
             n_iterations=int(sys.argv[1]), filename=sys.argv[2], inputs=inputs
         )
 
@@ -66,7 +68,7 @@ def replay():
     Replay the crew execution from a specific task.
     """
     try:
-        SalesPersonalizedEmailCrew().crew().replay(task_id=sys.argv[1])
+        MarketingEmailGeneratorCrew().crew().replay(task_id=sys.argv[1])
 
     except Exception as e:
         raise Exception(f"An error occurred while replaying the crew: {e}")
@@ -77,7 +79,7 @@ def test():
     """
     inputs = {"company_name": "AI LLMs"}
     try:
-        SalesPersonalizedEmailCrew().crew().test(
+        MarketingEmailGeneratorCrew().crew().test(
             n_iterations=int(sys.argv[1]), openai_model_name=sys.argv[2], inputs=inputs
         )
 

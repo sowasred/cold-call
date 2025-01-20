@@ -1,7 +1,7 @@
 [project]
-name = "sales_personalized_email"
+name = "marketing-email-generator"
 version = "0.1.0"
-description = "sales-personalized-email using crewAI"
+description = "AI-powered marketing email generator using crewAI"
 authors = [
     { name = "Your Name", email = "you@example.com" },
 ]
@@ -12,11 +12,13 @@ dependencies = [
 ]
 
 [project.scripts]
-sales_personalized_email = "sales_personalized_email.main:run"
-run_crew = "sales_personalized_email.main:run"
-train = "sales_personalized_email.main:train"
-replay = "sales_personalized_email.main:replay"
-test = "sales_personalized_email.main:test"
+marketing-email-generator = "src.main:run"
+train = "src.main:train"
+replay = "src.main:replay"
+test = "src.main:test"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
 
 [build-system]
 requires = [
