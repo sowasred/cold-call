@@ -15,14 +15,15 @@ logger = logging.getLogger()
 def initialize_driver():
     """Initialize and return the Selenium WebDriver."""
     options = uc.ChromeOptions()
-    options.add_argument('--no-sandbox')
-    options.add_argument('--disable-dev-shm-usage')
-    # options.add_argument('--disable-gpu')
-    # options.add_argument("user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36")
-    options.add_argument('--window-size=1440,900')  # Set window size for a 14 inch MacBook
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument(
+        "user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    )
+    options.add_argument("--window-size=1440,900")
 
-    driver = uc.Chrome(options=options, version_main=131)
-    return driver
+    return uc.Chrome(options=options)
+
 
 def scroll_to_load(driver, subcategory_name):
     """Scroll to the bottom of the page until all content is loaded."""
