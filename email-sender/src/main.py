@@ -6,8 +6,18 @@ from config import SENDGRID_API_KEY, TEMPLATE_ID, FROM_EMAIL, validate_config
 
 def load_personalized_data(file_path: str) -> list:
     """Load personalized email data from a JSON file."""
-    with open(file_path, 'r') as f:
-        return json.load(f)
+    try:
+        with open(file_path, 'r') as f:
+            print(f"Loading data from {file_path}")
+            data = json.load(f)
+            print(f"Successfully loaded data: {data}")
+            return data['emails']
+    except json.JSONDecodeError as e:
+        print(f"JSON parsing error: {str(e)}")
+        raise
+    except Exception as e:
+        print(f"Error loading file {file_path}: {str(e)}")
+        raise
 
 def send_email(to_email: str, dynamic_template_data: dict) -> bool:
     """
@@ -25,7 +35,11 @@ def send_email(to_email: str, dynamic_template_data: dict) -> bool:
         to_emails=to_email
     )
     message.template_id = TEMPLATE_ID
-    message.dynamic_template_data = dynamic_template_data
+    message.dynamic_template_data = {
+        'email_body': dynamic_template_data['email_body'],
+        'company_name': dynamic_template_data['company_name'],
+        'subject_line': dynamic_template_data['subject_line']
+    }
 
     try:
         sg = SendGridAPIClient(SENDGRID_API_KEY)
@@ -44,10 +58,9 @@ def main():
     try:
         # Load personalized data
         data = load_personalized_data('personalized_email.json')
-        
         # Send emails
         for item in data:
-            to_email = item.pop('email')  # Remove email from template data
+            to_email = item.pop('to')  # Remove email from template data
             success = send_email(to_email, item)
             if not success:
                 print(f"Failed to send email to {to_email}")
