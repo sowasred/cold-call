@@ -8,6 +8,8 @@ from scraper import (
 import pandas as pd
 import os
 from datetime import datetime
+import json
+import sys
 
 
 def format_company_data(companies, company_details):
@@ -45,9 +47,19 @@ def main():
     logger = setup_logger("logs")
     logger.info("Starting Homestar Scraper")
     print("logger setup")
-    # Load configuration
-    config = load_json("config/categories.json")
-    print("config loaded")
+    # Get the directory where the script is located
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    config_path = os.path.join(script_dir, "config", "categories.json")
+    # Add error handling
+    try:
+        config = load_json(config_path)
+        print(f"Successfully loaded config from: {config_path}")
+    except FileNotFoundError:
+        print(f"Error: Config file not found at {config_path}")
+        sys.exit(1)
+    except json.JSONDecodeError as e:
+        print(f"Error: Invalid JSON in config file: {e}")
+        sys.exit(1)
     categories = config.get("result", {})
     print("categories loaded")
     print(categories)

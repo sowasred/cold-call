@@ -18,10 +18,10 @@ def initialize_driver():
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
     # options.add_argument('--disable-gpu')
-    options.add_argument("user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36")
+    # options.add_argument("user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36")
     options.add_argument('--window-size=1440,900')  # Set window size for a 14 inch MacBook
 
-    driver = uc.Chrome(options=options)
+    driver = uc.Chrome(options=options, version_main=131)
     return driver
 
 def scroll_to_load(driver, subcategory_name):
