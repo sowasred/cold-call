@@ -50,7 +50,8 @@ uv sync
 
 ### Setup
 
-1. Add your `OPENAI_API_KEY` into the `.env` file
+1. Set up your LLM provider
+   - Add your `OPENAI_API_KEY` into the `.env` file if you want to use default GPT-4o mini
 
 2. Create a output directory in the root of the project
 

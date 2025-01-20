@@ -1,12 +1,17 @@
+from enum import Enum
 from crewai_tools import SeleniumScrapingTool, SerperDevTool
 from pydantic import BaseModel
 from typing import List, Optional
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
-from crewai import Agent, Crew, Process, Task
+from crewai import Agent, Crew, Process, Task, LLM
 from crewai.project import CrewBase, agent, crew, task
-from config.llm_config import LLMConfig, LLMProvider
 
+class LLMProvider(Enum):
+    OLLAMA = "ollama"
+    OPENAI = "openai"
 
 class PersonalizedEmail(BaseModel):
     to: str
@@ -20,12 +25,21 @@ class EmailOutput(BaseModel):
 class MarketingEmailGeneratorCrew:
     """MarketingEmailGenerator crew"""
 
-    def __init__(self, llm_provider: Optional[LLMProvider] = None):
-        self.llm_config = LLMConfig(llm_provider)
+    def __init__(self):
         self.agents_config = "config/agents.yaml"
         self.tasks_config = "config/tasks.yaml"
         self.output_file = os.path.join("output", "personalized_email.json")
-        self.llm = self.llm_config.get_llm()
+
+        if os.getenv("USE_OLLAMA"):
+            self.llm = LLM(
+                model="ollama/llama3.2",
+                base_url="http://localhost:11434"
+            )
+        else:
+            self.llm = LLM(
+                model="gpt-4o-mini",
+                base_url="https://api.openai.com/v1"
+            )
 
     @crew
     def crew(self) -> Crew:

@@ -5,6 +5,7 @@
 [x] - Add To field to personalized_email output - Chad
 [x] - Add all emails to one personalized_email json file
 [x] - Add a switch for the crew to run in with local llm or OpenAI - Chad
+[ ] - Add company name to the personalized_email json file - Chad
 [ ] - Adjust agents and tasks yaml to experiment with various agents and tasks - Chad
 [ ] - Create an html css template for the email that will be used to send the email - Chad
 

@@ -40,7 +40,7 @@ def run():
                     print(f"{key}: {value!r}")
                 
                 # Initialize crew with specific provider and generate email
-                MarketingEmailGeneratorCrew(llm_provider=LLMProvider.OLLAMA).crew().kickoff(inputs=inputs)
+                MarketingEmailGeneratorCrew().crew().kickoff(inputs=inputs)
                 
             except Exception as company_error:
                 print(f"Error processing company {idx}: {str(company_error)}")
