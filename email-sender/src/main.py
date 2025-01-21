@@ -1,6 +1,6 @@
 import json
 import pandas as pd
-from sendgrid import SendGridAPIClient
+import sendgrid
 from sendgrid.helpers.mail import Mail
 from config import SENDGRID_API_KEY, TEMPLATE_ID, FROM_EMAIL, validate_config
 
@@ -36,19 +36,19 @@ def send_email(to_email: str, dynamic_template_data: dict) -> bool:
     )
     message.template_id = TEMPLATE_ID
     message.dynamic_template_data = {
+        'subject': dynamic_template_data['subject_line'],
         'email_body': dynamic_template_data['email_body'],
         'company_name': dynamic_template_data['company_name'],
-        'subject_line': dynamic_template_data['subject_line']
     }
 
     try:
-        sg = SendGridAPIClient(SENDGRID_API_KEY)
+        sg = sendgrid.SendGridAPIClient(SENDGRID_API_KEY)
         response = sg.send(message)
-        print(f"Email sent to {to_email}. Status code: {response.status_code}")
-        return True
+        return response.status_code
+
     except Exception as e:
-        print(f"Error sending email to {to_email}: {str(e)}")
-        return False
+        print(str(e))
+        return str(e)
 
 def main():
     """Main function to send personalized emails."""
