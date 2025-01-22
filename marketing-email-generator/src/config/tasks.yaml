@@ -1,33 +1,29 @@
-research_prospect_task:
+initial_company_research:
   description: >
-    Conduct thorough research on the prospect's company {company}.
-    Look for recent news, achievements, challenges, or interests related to
-    the company in the {industry} industry.
-    Use their website {website}, LinkedIn {linkedin},
-    Facebook {facebook}, Instagram {instagram}, and Twitter {twitter}
-    to gather relevant information.
+    Research {company} using search the internet tool and
+    extract information from it's website, website_url: {website} using the read website tool.
   expected_output: >
-    A detailed dossier on {company}, including recent activities, potential pain points,
-    company culture, contact information (phone: {phone}, email: {email}, address: {address}),
-    online presence (rating: {rating}), and any other information that could be used 
-    to personalize communication.
+    Create a bullet point list of company information.
 
-personalize_content_task:
+research_industry_needs:
   description: >
-    Using the research on {company} in the {industry} industry,
-    identify specific ways that our company ({sender_company}) can address their potential needs
-    or align with their business goals. Look for unique angles or shared
-    points of interest that can be used to create a strong connection
-    in the email. Consider their category ({category}) and
-    subcategory ({subcategory}) to tailor the messaging. Use our company summary
-    ({sender_summary}) to find relevant alignment points and value propositions.
+    Research on {industry} industry and {category} category using search the internet tool.
+    Look for common industry technological challenges and pain points.
+  expected_output: >
+    Bullet point list of common industry technological challenges and pain points.
+
+sales_pitch:
+  description: >
+    Use the report on {company} and challenges on {industry} industry,
+    then identify how {sender_company} can address potential needs using summary: {sender_summary}. 
+    Look for unique angles or shared points of interest that can be used to create a strong connection.
   expected_output: >
     A list of personalized talking points and angles to use in the email,
     connecting {company}'s business context, industry challenges, and goals
     with the benefits that {sender_company} can provide. Include relevant details
     from their social media presence and website to demonstrate thorough research.
 
-write_email_task:
+write_sales_email:
   description: >
     Craft a concise, personalized email (300-500 words) to {company} based on the research and personalization insights.
     Use the research findings about their industry ({industry}), category ({category}),

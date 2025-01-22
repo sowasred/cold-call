@@ -33,10 +33,6 @@ def ensure_fields(data: dict, field_type: str) -> dict:
         for key, value in data.items()
     }
     
-    # Debug print
-    print(f"\nCleaned {field_type} data:")
-    print(cleaned_data)
-    
     base_dict.update(cleaned_data)
     return base_dict
 

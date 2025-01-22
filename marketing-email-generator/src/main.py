@@ -3,9 +3,8 @@
 import os
 os.environ["OTEL_SDK_DISABLED"] = "true"
 import sys
-from crew import MarketingEmailGeneratorCrew
-from data_loader import load_sender_info, load_target_info
-from config.llm_config import LLMProvider
+from src.crew import MarketingEmailGeneratorCrew
+from src.data_loader import load_sender_info, load_target_info
 
 def run():
     """
@@ -33,11 +32,6 @@ def run():
                 
                 # Combine target and sender information
                 inputs = {**target_data, **sender_info}
-                
-                # Debug print
-                print("\nFinal combined inputs:")
-                for key, value in inputs.items():
-                    print(f"{key}: {value!r}")
                 
                 # Initialize crew with specific provider and generate email
                 MarketingEmailGeneratorCrew().crew().kickoff(inputs=inputs)
