@@ -8,11 +8,7 @@ load_dotenv()
 
 from crewai import Agent, Crew, Process, Task, LLM
 from crewai.project import CrewBase, agent, crew, task
-
-class LLMProvider(Enum):
-    OLLAMA = "ollama"
-    OPENAI = "openai"
-    DEEPSEEK = "deepseek"
+from src.llm_providers import LLMProvider, initialize_llm
 
 class PersonalizedEmail(BaseModel):
     to: str
@@ -36,30 +32,18 @@ class MarketingEmailGeneratorCrew:
         #     config=self.agents_config["manager"],
         #     allow_delegation=True,
         # )
-        
-        # self.llm = LLM(
-        #         model=f"deepseek/{os.getenv('DEEPSEEK_MODEL')}",
-        #         base_url=f"{os.getenv('DEEPSEEK_BASE_URL')}"
-        #     )
 
-        if os.getenv("USE_OLLAMA"):
-            print("Using OLLAMA")
-            self.llm = LLM(
-                model=f"ollama/{os.getenv('OLLAMA_MODEL')}",
-                base_url=f"{os.getenv('OLLAMA_BASE_URL')}"
+        active_llm = os.getenv("ACTIVE_LLM", "").upper()
+        print(f"Active LLM: {active_llm}")
+        try:
+            provider = LLMProvider(active_llm)
+        except ValueError:
+            raise ValueError(
+                f"Invalid LLM provider: {active_llm}. "
+                f"Must be one of: {', '.join([p.value for p in LLMProvider])}"
             )
-        elif os.getenv("USE_DEEPSEEK"):
-            print("Using DEEPSEEK")
-            self.llm = LLM(
-                model=f"deepseek/{os.getenv('DEEPSEEK_MODEL')}",
-                base_url=f"{os.getenv('DEEPSEEK_BASE_URL')}"
-            )
-        else:
-            print("Using OPENAI")
-            self.llm = LLM(
-                model=f"{os.getenv('OPENAI_MODEL')}",
-                base_url=f"{os.getenv('OPENAI_BASE_URL')}"
-            )
+        
+        self.llm = initialize_llm(provider)
 
     @agent
     def researcher(self) -> Agent:
