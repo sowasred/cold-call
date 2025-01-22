@@ -68,4 +68,9 @@ This is a web application that extracts and analyzes company data from website s
 - AI-powered company summary generation
 
 2. **lead-reach**
-This is a nextjs application that will be micro sass project that companies will be able to register and get leads and send them tailored emails via this platform.
+A modern Next.js-based SaaS platform designed to streamline lead generation and email marketing. Companies can:
+- Register and manage their business profile
+- Access targeted lead generation tools
+- Create and send personalized email campaigns
+- Track engagement and campaign performance
+- Scale their outreach efforts efficiently
