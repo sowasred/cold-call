@@ -11,7 +11,7 @@
 
 ## Ozan Todos
 [x] - Send email script out of personalized_email json file
-[ ] - Repo readme file fix
+[x] - Repo readme file fix
 [ ] - Create an html css template for the email that will be used to send the email - Ozan
 [ ] - Orchestration of all the projects in the repo
 
