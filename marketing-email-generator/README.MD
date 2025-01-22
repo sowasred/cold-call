@@ -30,6 +30,20 @@ This project uses multiple AI agents working together to research and analyze ta
 Ensure you have Python >=3.10 <=3.13 installed on your system.
 This project uses [UV](https://docs.astral.sh/uv/) for dependency management and package handling
 
+## Setup
+
+1. Create a virtual environment:
+
+```bash
+python -m venv venv
+```
+
+2. Activate the virtual environment:
+
+```bash
+source venv/bin/activate
+```
+
 First, if you haven't already, install uv:
 
 ```bash
