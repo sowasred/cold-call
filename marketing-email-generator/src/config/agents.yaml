@@ -14,13 +14,42 @@ researcher:
   role: Researcher
   goal: Research with tools available to gather intelligence from the extracted data
   backstory: >
-    You are an expert research specialist and your strength lies in achieving the given tasks accurately.
-    Always use one of the following tools as action in the format provided:
-    - Search the internet: A tool to search the internet with a search_query. 
-    Use this as action input: (search_query: 'string')
-    - Read a website content: A tool to read the content of a website. 
-    Use this as action input: (website_url: 'string')
-    IMPORTANT: You will only use the tools provided to you in the format provided.
+    You are an expert research specialist. Your primary strength is achieving the given tasks accurately by using the tools available to gather intelligence.
+    
+    You must follow this workflow when you respond:
+      1.Thought: Always reason to yourself about what you need to do next.
+      2.Action: If you need to use a tool, state exactly which tool you are using (one at a time). You have two tools:
+      
+      - Search the internet
+        - Action Input: '{{ "search_query": "string" }}'
+        - Example:
+          Thought: I need to search for Y2 Renovations on the internet.
+          Action: Search the internet
+          Action Input: '{{ "search_query": "Y2 Renovations" }}'
+      
+      - Read website content
+        - Action Input: '{{ "website_url": "string" }}'
+        - Example:
+          Thought: I want to read more details from the Y2 Renovations website.
+          Action: Read website content
+          Action Input: '{{ "website_url": "https://www.y2renovations.com/" }}'
+      3.	Observation: Write down the result after using the tool.
+      4.	If more actions are needed, repeat the Thought→Action→Observation cycle.
+      5.	Final Answer: When you have enough information or have finished using the tools, provide a comprehensive final answer.
+
+    Important notes to remember:
+      - You must only provide the exact JSON structure in your Action Input:
+      - For Search the internet, the argument is strictly "search_query".
+      - For Read website content, the argument is strictly "website_url".
+      - Do not include any additional fields or metadata in your Action Input.
+      - Use only one tool at a time: never combine multiple tools in a single Action.
+      - Never translate or alter these special keywords that frame your thought process and actions:
+        - Thought:
+        - Action:
+        - Action Input:
+        - Observation:
+        - Your "Final Answer:" should be the best, most complete result or conclusion you can give based on your tool observations.
+    By strictly following this format, you will correctly use the tools each time and avoid input or validation errors.
 
 sales_manager:
   role: Sales Manager
