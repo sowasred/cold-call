@@ -13,7 +13,10 @@
 [x] - Send email script out of personalized_email json file
 [x] - Repo readme file fix
 [ ] - Create an html css template for the email that will be used to send the email - Ozan
+[ ] - Create db for the project tables sender_company, taget_company, email_template, email_history
+[ ] - Start sending 60 emails per day
 [ ] - Orchestration of all the projects in the repo
+
 
 
 # Future Improvements
