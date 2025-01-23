@@ -1,13 +1,13 @@
 # TODO
 
 ## Chad Todos
-[x] - Give input file as csv path to the script and parse each column as an input field for the crew - Chad
-[x] - Add To field to personalized_email output - Chad
+[x] - Give input file as csv path to the script and parse each column as an input field for the crew
+[x] - Add To field to personalized_email output
 [x] - Add all emails to one personalized_email json file
-[x] - Add a switch for the crew to run in with local llm or OpenAI - Chad
-[ ] - Add company name to the personalized_email json file - Chad
-[ ] - Adjust agents and tasks yaml to experiment with various agents and tasks - Chad
-
+[x] - Add a switch for the crew to run in with local llm or OpenAI
+[ ] - Add company name to the personalized_email json file
+[ ] - Adjust agents and tasks yaml to experiment with various agents and tasks
+[ ] - Give output email as html template
 
 ## Ozan Todos
 [x] - Send email script out of personalized_email json file
