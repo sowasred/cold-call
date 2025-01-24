@@ -12,7 +12,7 @@
 ## Ozan Todos
 [x] - Send email script out of personalized_email json file
 [x] - Repo readme file fix
-[ ] - Create an html css template for the email that will be used to send the email
+[ ] - Create an html css template for the email that will be used to send the email add calendly link
 [ ] - Design the system in [Figma](https://www.figma.com/board/qYouSgVNYn8aX1SExfFdix/Cold-Email-automation?node-id=0-1&t=k9RjBtKSYPdgvzd0-1)
 [ ] - Create db for the project tables sender_company, taget_company, email_template, email_history
 [ ] - Start sending 60 emails per day
