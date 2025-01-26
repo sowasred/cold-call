@@ -60,7 +60,7 @@ def main():
         data = load_personalized_data('personalized_email.json')
         # Send emails
         for item in data:
-            to_email = item.pop('to')  # Remove email from template data
+            to_email = item.pop('company_email')  # Remove email from template data
             success = send_email(to_email, item)
             if not success:
                 print(f"Failed to send email to {to_email}")
