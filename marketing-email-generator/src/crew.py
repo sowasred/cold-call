@@ -19,12 +19,12 @@ class PersonalizedEmail(BaseModel):
 
     @validator('email_body')
     def clean_html(cls, v):
-        print('ozan clean html called')
-        print(v)
-        
         # First convert the plain text/markdown to HTML structure
-        paragraphs = v.split('\n\n')
+        paragraphs = v.split('\n')  # Changed from \n\n to \n to handle list items properly
         html_content = []
+        
+        in_list = False
+        list_items = []
         
         for p in paragraphs:
             p = p.strip()
@@ -33,43 +33,38 @@ class PersonalizedEmail(BaseModel):
                 
             # Convert markdown bold to HTML strong
             p = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', p)
+            # Convert markdown links to HTML anchor tags
+            p = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', r'<a href="\2">\1</a>', p)
             
-            # Convert markdown links to text only
-            p = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', r'\1', p)
-            
-            # Convert bullet points to list items
+            # Handle bullet points
             if p.startswith('- '):
-                p = f'<li>{p[2:]}</li>'
+                if not in_list:
+                    in_list = True
+                    list_items = []  # Reset list items when starting new list
+                # Remove the bullet point marker and add as separate list item
+                item_content = p[2:].strip()
+                list_items.append(f'<li>{item_content}</li>')
             else:
-                p = f'<p>{p}</p>'
-            
-            html_content.append(p)
+                if in_list:
+                    # Close previous list
+                    html_content.append(f'<ul style="margin: 10px 0; padding-left: 20px;">{" ".join(list_items)}</ul>')
+                    list_items = []  # Clear list items after adding to content
+                    in_list = False
+                if p:  # Only add non-empty paragraphs
+                    html_content.append(f'<p>{p}</p>')
         
-        # Wrap everything in table structure
-        v = f'<tr><td>{" ".join(html_content)}</td></tr>'
+        # Close any remaining list at the end of processing
+        if in_list and list_items:  # Check both flags to ensure we have items to add
+            html_content.append(f'<ul style="margin: 10px 0; padding-left: 20px;">{" ".join(list_items)}</ul>')
         
-        print('after converting to HTML')
-        print(v)
+        # Join all content and wrap in table structure with styling
+        v = '<tr><td>' + ''.join(html_content) + '</td></tr>'
         
-        # Define allowed tags
-        allowed_tags = ['tr', 'td', 'p', 'li', 'strong', 'ul', 'ol']
-        allowed_pattern = '|'.join(allowed_tags)
-        print('allowed tags:', allowed_pattern)
+        # Remove any unnecessary escaping
+        v = v.replace('\\n', '').replace('\\/', '/').strip()
+        #escape quotes
+        v = v.replace('"', '\\"')
         
-        # Handle HTML formatting for JSON
-        v = (v
-            # 1. Escape quotes in HTML attributes
-            .replace('"', '\\"')
-            # 2. Escape forward slashes in closing tags
-            .replace('</', '<\\/')
-            # 3. Add space before self-closing slashes
-            .replace('/>', ' />')
-            # 4. Preserve newlines but escape them for JSON
-            .replace('\n', '\\n')
-        )
-        
-        print('final HTML output')
-        print(v)
         return v
 
     class Config:
