@@ -1,27 +1,10 @@
 {
-  "PersonalizedEmail": [
+  "emails": [
     {
-      "to": "info@y2canada.com",
-      "subject": "Unlock the Power of AI in Construction Renovations",
-      "body": `
-        Dear Y2 Design & Build Team,
-
-       I am reaching out on behalf of Techfi, a cutting-edge IT solutions company that offers a range of services to empower small and medium-sized businesses in North America. Our main focus is on providing custom AI solutions tailored to various industries, including the construction sector.
-
-      At Techfi, we understand that the construction industry faces numerous challenges such as labor shortages, rising material costs, project delays, and safety concerns. However, by leveraging technology and innovation, contractors can overcome these obstacles and drive success.
-
-       Our AI solution development services can help improve efficiency and productivity in your business operations. For instance, our experts can help develop customized solutions for managing labor shortages, optimizing supply chain management to mitigate the impact of rising material costs, and enhancing safety protocols through better design, construction methods, and worker training.
-
-      By partnering with Techfi, you will gain access to a wide array of benefits that can elevate your business. These include improved project timelines, enhanced customer satisfaction, increased revenue streams, and a competitive edge in the market.
-
-      I would like to schedule a call to discuss how our AI solutions can specifically support Y2 Design & Build's operations. Please do not hesitate to contact me directly at (705) 791-7718 or hello@techfi.ca to arrange a convenient time for us to speak further.
-
-       Thank you for considering Techfi as your trusted partner in the construction industry.
-
-      Best regards,
-      Ozan Muldur
-      Business Development Engineer
-      Techfi
+      "to": "Y2 Renovations Team",
+      "subject_line": "Enhancing Your Renovation Services with Techfi",
+      "email_body": "<tr><td><p>Hi Y2 Renovations Team,<\\/p> <p>I hope this message finds you well! I’ve been following your work in Richmond Hill and am impressed by how Y2 Renovations focuses on personalized service and quality craftsmanship, as showcased on your website and social media. With over 13 years in the remodeling industry, it’s clear you have a deep commitment to client satisfaction.<\\/p> <p>At Techfi, we understand the unique challenges you face in the construction and renovation sector. From slow technological adoption to cash flow issues, we have developed tailored IT solutions to streamline your operations and enhance efficiency. Here are a few ways we can help:<\\/p> <li><strong>Artificial Intelligence Solutions:<\\/strong> We offer custom AI solutions that can simplify project management and documentation. By automating mundane tasks, you can reduce human error and improve your team's efficiency.\\n- <strong>Improved Communication Tools:<\\/strong> Our IT service packages include platforms designed to facilitate transparent communication among project stakeholders, ensuring everyone has access to timely information. This can reduce the \\\"blame game\\\" and enhance collaboration.\\n- <strong>Cash Flow Management:<\\/strong> With our financial management software, you can track client payments and manage your expenses easily. This solution can help address some of the cash flow delays you experience after project completion.<\\/li> <p>Leveraging our services will allow you to focus on what you do best—transforming homes beautifully. Let’s schedule a time to discuss how Techfi can specifically benefit Y2 Renovations and support your growth in the renovation space.<\\/p> <p>Looking forward to connecting!<\\/p><\\/td><\\/tr>",
+      "company_name": "Y2 Renovations"
     }
   ]
 }

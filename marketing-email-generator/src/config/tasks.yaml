@@ -25,29 +25,36 @@ sales_pitch:
 
 write_sales_email:
   description: >
-    Craft a concise, personalized email (300-500 words) to {company} based on the research and personalization insights.
-    Use the research findings about their industry ({industry}), category ({category}),
-    and recent activities to create an email that demonstrates deep understanding. Incorporate elements
-    from {sender_company}'s value proposition ({sender_summary}) to show clear alignment and value.
-    The email should reference specific details from their digital presence ({website}, social media)
-    to prove thorough research while maintaining a professional yet conversational tone.
-    IMPORTANT: Use the exact sender information provided:
-    - Sender Name: {sender_full_name}
-    - Title: {sender_title}
-    - Company: {sender_company}
-    - Phone: {sender_phone}
-    - Email: {sender_email}
-    - Website: {sender_website}
-    - Recipient Email: {email}
+    Craft a concise (300–500 words), personalized HTML email to {company} based on the research and personalization insights. 
+    Draw from {industry}, {category}, and recent business activities to show a deep understanding of their context. 
+    Highlight how {sender_company}’s offerings ({sender_summary}) align with their needs.
+
+    The middle section of the email (email_body) must:
+    - Use only <tr>, <td>, <p>, <li>, <ul>, <ol>, and <strong> tags (plus minimal inline styling if needed)
+    - Reference specific details from their online presence ({website}, social media) to prove thorough research
+    - Present 2–3 key value propositions or benefits in short paragraphs or list items
+    - Use clear, simple sentences (no jargon or overly technical terms)
+    - Avoid placeholders or leftover template variables (e.g., "{{placeholder}}")
+
+    The final HTML email already contains:
+    - A greeting line that addresses the company
+    - A closing section with a Calendly link and contact details
+
+    Your job is to supply only the HTML body portion that goes between the greeting and the closing.
+
   expected_output: >
     An EmailOutput object containing a list of PersonalizedEmail objects, each with:
-    1. The recipient's email address in the 'to' field
-    2. A compelling subject line that demonstrates research insights and value proposition (max 60 chars)
-    3. A concise email body (300-500 words) that:
-       - Shows deep understanding of the prospect's business and industry context
-       - References specific details from their online presence and recent activities 
-       - Clearly articulates 2-3 key value propositions and benefits
-       - Includes a clear call-to-action for next steps
-       - Uses the exact sender contact information provided
-       - Contains no placeholder text or template variables
+    1. The recipient's email address in the "to" field
+    2. A subject line (max 60 characters) referencing the research findings and value proposition
+    3. A middle portion of HTML (email_body) that is 300–500 words long, demonstrates understanding of the prospect, 
+       uses only the allowed HTML tags, and references their digital presence. It must feature a clear call to action, 
+       incorporate 2–3 key benefits, and use the exact sender information provided:
+         - Sender Name: {sender_full_name}
+         - Title: {sender_title}
+         - Company: {sender_company}
+         - Phone: {sender_phone}
+         - Email: {sender_email}
+         - Website: {sender_website}
+         - Recipient Email: {email}
+       Do not include any unused placeholders or variables in this final HTML content.
 
