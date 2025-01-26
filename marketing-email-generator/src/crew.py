@@ -12,7 +12,7 @@ from crewai.project import CrewBase, agent, crew, task
 from src.llm_providers import LLMProvider, initialize_llm
 
 class PersonalizedEmail(BaseModel):
-    to: str
+    company_email: str
     subject_line: str
     email_body: str
     company_name: str

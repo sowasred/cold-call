@@ -44,7 +44,7 @@ write_sales_email:
 
   expected_output: >
     An EmailOutput object containing a list of PersonalizedEmail objects, each with:
-    1. The recipient's email address in the "to" field
+    1. The recipient's email address in the "company_email" field which is {email}
     2. A subject line (max 60 characters) referencing the research findings and value proposition
     3. A middle portion of HTML (email_body) that is 300–500 words long, demonstrates understanding of the prospect, 
        uses only the allowed HTML tags, and references their digital presence. It must feature a clear call to action, 
@@ -57,4 +57,5 @@ write_sales_email:
          - Website: {sender_website}
          - Recipient Email: {email}
        Do not include any unused placeholders or variables in this final HTML content.
+    4. The company name in the "company_name" field which is {company}
 
