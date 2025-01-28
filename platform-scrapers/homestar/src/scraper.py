@@ -80,49 +80,26 @@ def fetch_company_details(driver, company_name_urls):
             logger.info(f"Current URL: {driver.current_url}")
             logger.info(f"Page Title: {driver.title}")
             
-            # Stop here for inspection
-            # input("Press Enter to continue after inspecting the page...")
-            
+            # Check if website exists first
+            try:
+                website = driver.find_element(By.CSS_SELECTOR, "a[data-testid='company-listing-website']").get_attribute("href")
+                if not website:
+                    logger.info(f"Skipping company {company['name']} - no website found")
+                    continue
+            except NoSuchElementException:
+                logger.info(f"Skipping company {company['name']} - no website found")
+                continue
+                
             # Check if we can find any main content
             try:
-                # Wait for page load
-                # WebDriverWait(driver, 10).until(
-                #     lambda driver: driver.execute_script('return document.readyState') == 'complete'
-                # )
-                
-                # Log the current page title and URL for verification
-                # Uncomment the following lines one by one to debug step by step
-                
-                # Step 1: Log the page title
                 logger.debug(f"Page Title: {driver.title}")
-                
-                # Step 2: Log the current URL
                 logger.debug(f"Current URL: {driver.current_url}")
                 
-                # Step 3: Log all available IDs on the page
                 contact_element = WebDriverWait(driver, 5).until(
                     EC.presence_of_element_located((By.CSS_SELECTOR, "[data-react-class='CompanyContactLinks']"))
                 )
                 logger.debug("Found element with data-react-class='CompanyContactLinks'")
                 logger.debug(f"Element HTML: {contact_element.get_attribute('innerHTML')}")
-                
-                # # Step 4: Try to find main content with different approaches
-                # main_content = WebDriverWait(driver, 5).until(
-                #     EC.presence_of_element_located((By.CSS_SELECTOR, ".company-result"))
-                # )
-                # logger.debug("Main content found using alternative selector")
-                
-                # # Log all available IDs on the page
-                # ids = driver.execute_script("""
-                #     return Array.from(document.querySelectorAll('[id]')).map(el => el.id);
-                # """)
-                # logger.debug(f"Available IDs on page: {ids}")
-                
-                # # Try to find main content with different approaches
-                # main_content = WebDriverWait(driver, 5).until(
-                #     EC.presence_of_element_located((By.CSS_SELECTOR, ".company-result"))
-                # )
-                # logger.debug("Main content found using alternative selector")
                 
             except TimeoutException:
                 logger.error("Could not find main content - possible anti-bot protection")
@@ -184,8 +161,6 @@ def fetch_company_details(driver, company_name_urls):
                 logger.error(f"Error type: {type(e).__name__}")
                 phone_number = None
             
-            # get the website
-            website = driver.find_element(By.CSS_SELECTOR, "a[data-testid='company-listing-website']").get_attribute("href")
             # get the score of the company
             score = driver.find_element(By.CSS_SELECTOR, "p.star-score-icon-and-score__text").text
             print('website', website)
