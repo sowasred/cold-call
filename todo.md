@@ -5,7 +5,10 @@
 [x] - Add To field to personalized_email output
 [x] - Add all emails to one personalized_email json file
 [x] - Add a switch for the crew to run in with local llm or OpenAI
+[ ] - Company Name needs to changed to CompanyName in the platform-scrapers and contact-extractor
+[ ] - targets.csv needs to be made same as other input files
 [ ] - Add company name to the personalized_email json file
+[ ] - Make sure all companies are getting pushed to personalized_email json file
 [ ] - Adjust agents and tasks yaml to experiment with various agents and tasks
 [ ] - Give output email as html template
 
