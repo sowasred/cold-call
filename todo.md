@@ -5,6 +5,7 @@
 [x] - Add To field to personalized_email output
 [x] - Add all emails to one personalized_email json file
 [x] - Add a switch for the crew to run in with local llm or OpenAI
+[ ] - Remove unnecessary stuff from config files in marketing-email-generator
 [ ] - Company Name needs to changed to CompanyName in the platform-scrapers and contact-extractor
 [ ] - targets.csv needs to be made same as other input files
 [ ] - Add company name to the personalized_email json file
